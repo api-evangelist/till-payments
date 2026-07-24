@@ -1,0 +1,108 @@
+aid: till-payments
+name: Till Payments
+review:
+  question: Does Till Payments expose a genuine public developer surface with downloadable OpenAPI specifications?
+  answer: true
+  date: '2026-07-24'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    Till Payments is an Australian (Sydney, founded 2012) merchant acquirer and
+    integrated-payments technology company, acquired by Nuvei in 2024. It runs a
+    genuinely API-first developer surface: a public Developer Hub, hosted V3
+    reference documentation, and a docs site (docs.tillpayments.com) covering
+    guides, Pay By Link, and Terminal Connect. Two real, downloadable OpenAPI
+    3.0 specifications were confirmed to parse and were harvested verbatim: the
+    Till Payments Gateway (26 paths across options, prepare-transaction,
+    transaction, schedule, status, and dispute operations) and the Direct
+    PCI-enabled Payment Platform (9 transaction paths for PCI-certified
+    merchants). Both declare HTTP Basic authentication and are served over
+    TLS 1.2+. Asynchronous transaction results are delivered by webhook-style
+    callbacks to a merchant-supplied callbackUrl. Pay By Link and Terminal
+    Connect are documented but publish no downloadable spec. No public GraphQL,
+    gRPC/.proto, AsyncAPI, or OpenID/OAuth discovery document was found.
+  homeMarket: Australia
+  authModel:
+    scheme: HTTP Basic
+    detail: Both harvested specs declare a single securityScheme (basicAuth, type http, scheme basic). Requests are sent over HTTPS/TLS 1.2+. No OAuth2 or mTLS surface documented; no /.well-known/openid-configuration or oauth-authorization-server served (gateway host 404, secure host 418).
+  webhooks:
+    present: true
+    mechanism: Asynchronous transaction callbacks POSTed to a merchant-supplied callbackUrl (notificationSource in payloads). No AsyncAPI document published.
+  postman:
+    present: false
+    note: No public Postman collection or workspace found; the V3 API reference embeds multi-language code samples (PHP cURL, C#, Java, Ruby, Python, Go, JavaScript).
+  specsHarvested:
+    - file: openapi/till-payments-gateway.yml
+      source: https://gateway.tillpayments.com/Schema/V3/OpenApiSpecification.yml
+      httpStatus: 200
+      fetched: '2026-07-24'
+      openapi: 3.0.0
+      title: Till Payments Gateway
+      version: 3.0.0
+      paths: 26
+      tags: [options, prepare-transaction, schedule, status, transaction]
+    - file: openapi/till-payments-direct-pci.yml
+      source: https://secure.tillpayments.com/Schema/V3/OpenApiSpecificationDirectPCI.yml
+      httpStatus: 200
+      fetched: '2026-07-24'
+      openapi: 3.0.0
+      title: tillpayments.com Payment Platform
+      version: 3.0.0
+      paths: 9
+      tags: [transaction]
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://gateway.tillpayments.com/api/v3
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://secure.tillpayments.com/api/v3
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Merchant-supplied callbackUrl receives asynchronous transaction notifications.
+      documented: true
+    - protocol: GraphQL
+      documented: false
+      note: No public GraphQL endpoint found.
+    - protocol: gRPC
+      documented: false
+      note: No published .proto found.
+sources:
+  - url: https://tillpayments.com/developer-hub
+    type: DeveloperPortal
+    httpStatus: 200
+    note: Public developer hub landing page.
+  - url: https://tillpayments.com/developer-portal
+    type: DeveloperPortal
+    httpStatus: 200
+    note: 308 redirects to https://docs.tillpayments.com/guides.
+  - url: https://docs.tillpayments.com/guides
+    type: Documentation
+    httpStatus: 200
+    note: Developer documentation site (guides, Terminal Connect, FAQ).
+  - url: https://docs.tillpayments.com/openapi/
+    type: APIReference
+    httpStatus: 200
+    note: Lists Pay By Link (available) plus Online Payment/Method/Customer/Subscription APIs marked Coming Soon.
+  - url: https://gateway.tillpayments.com/documentation/apiv3
+    type: APIReference
+    httpStatus: 200
+    note: Gateway V3 API reference with multi-language code samples.
+  - url: https://gateway.tillpayments.com/Schema/V3/OpenApiSpecification.yml
+    type: OpenAPI
+    httpStatus: 200
+    note: Downloadable Gateway OpenAPI 3.0 spec, harvested verbatim.
+  - url: https://secure.tillpayments.com/Schema/V3/OpenApiSpecificationDirectPCI.yml
+    type: OpenAPI
+    httpStatus: 200
+    note: Downloadable Direct PCI-enabled OpenAPI 3.0 spec, harvested verbatim.
+  - url: https://status.tillpayments.com/
+    type: StatusPage
+    httpStatus: 200
+    note: Public status page.
+  - url: https://github.com/tillpayments
+    type: GitHubOrganization
+    httpStatus: 200
+    note: Public GitHub organization.

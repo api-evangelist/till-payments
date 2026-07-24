@@ -1,0 +1,127 @@
+aid: till-payments
+url: https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/apis.yml
+name: Till Payments
+kind: company
+description: >-
+  Till Payments is a Sydney, Australia founded merchant acquirer and payment
+  technology company (established 2012), focused on integrated payments for
+  independent software vendors, platforms, and omnichannel merchants across
+  online, in-person, and unattended channels. Its product family spans a
+  card-present and card-not-present processing Gateway, a PCI-enabled Direct API
+  for merchants handling raw card data, Pay By Link, and Terminal Connect for
+  in-person device integrations. Till was acquired by Nuvei in 2024 and now
+  operates as part of Nuvei's global platform while retaining its Australian home
+  market and developer surface. Its API posture is genuinely API-first: a public
+  developer hub, hosted V3 reference documentation, and two downloadable OpenAPI
+  3.0 specifications (the Gateway API and the Direct PCI-enabled Payment
+  Platform), both authenticated with HTTP Basic credentials over TLS 1.2+.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Australia
+- Payment Gateway
+- Payment Processing
+- Acquiring
+- Merchant Services
+- Card Payments
+- In-Person Payments
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: till-payments:till-payments-gateway
+  name: Till Payments Gateway API
+  description: >-
+    The Till Payments Gateway V3 API for processing card-present and
+    card-not-present transactions — debit, preauthorize, capture, void, refund,
+    payout, registration/tokenization, recurring schedules, transaction status,
+    3-D Secure/DCC flows, and dispute handling — with asynchronous callbacks via
+    a merchant-supplied callbackUrl.
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - Payments
+  - Gateway
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-gateway.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+- aid: till-payments:till-payments-direct-pci
+  name: Till Payments Direct PCI-enabled API
+  description: >-
+    The Till Payments Direct PCI-enabled Payment Platform V3 API for merchants
+    that are PCI DSS certified to collect and transmit raw cardholder data.
+    Requests are sent over HTTPS (TLS 1.2+) with JSON bodies to the secure host
+    for direct transaction processing.
+  humanURL: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  baseURL: https://secure.tillpayments.com/api/v3
+  tags:
+  - Payments
+  - PCI
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-direct-pci.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-pay-by-link
+  name: Till Payments Pay By Link API
+  description: >-
+    The Till Payments Pay By Link API for generating shareable hosted payment
+    links, documented on the Till developer documentation site. No downloadable
+    OpenAPI specification was published for this product at the time of review.
+  humanURL: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
+  tags:
+  - Payments
+  - Pay By Link
+  properties:
+  - type: Documentation
+    url: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
+- aid: till-payments:till-payments-terminal-connect
+  name: Till Payments Terminal Connect API
+  description: >-
+    Terminal Connect is Till Payments' in-person integration surface for
+    connecting point-of-sale software to Till payment terminals, documented via
+    getting-started and integration guides on the Till developer documentation
+    site. No downloadable OpenAPI specification was published for this product at
+    the time of review.
+  humanURL: https://docs.tillpayments.com/guides/terminal-connect/getting-started/
+  tags:
+  - Payments
+  - In-Person Payments
+  - Terminal
+  properties:
+  - type: Documentation
+    url: https://docs.tillpayments.com/guides/terminal-connect/getting-started/
+common:
+- type: Website
+  url: https://tillpayments.com/
+- type: DeveloperPortal
+  url: https://tillpayments.com/developer-hub
+- type: Documentation
+  url: https://docs.tillpayments.com/guides
+- type: APIReference
+  url: https://gateway.tillpayments.com/documentation/apiv3
+- type: GitHubOrganization
+  url: https://github.com/tillpayments
+- type: StatusPage
+  url: https://status.tillpayments.com/
+- type: Pricing
+  url: https://tillpayments.com/pricing
+- type: Blog
+  url: https://tillpayments.com/blog
+- type: Support
+  url: https://tillpayments.com/contact
+- type: TermsOfService
+  url: https://tillpayments.com/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://tillpayments.com/privacy-policy
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
