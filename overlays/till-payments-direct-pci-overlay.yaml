@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Till Payments Direct PCI-enabled API
+  version: 1.0.0
+extends: openapi/till-payments-direct-pci.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: till-payments
+      x-apievangelist-pci: Requires merchant PCI DSS certification to transmit raw cardholder data.
+      x-apievangelist-auth: http-basic + apiKey path param + optional HMAC-SHA512 request signing
+      x-apievangelist-idempotency:
+        supported: true
+        field: merchantTransactionId
+        duplicate-error-code: 3004
+      x-apievangelist-artifacts:
+        conventions: conventions/till-payments-conventions.yml
+        errors: errors/till-payments-problem-types.yml
+        authentication: authentication/till-payments-authentication.yml
+  - target: $.servers
+    update:
+      - url: https://secure.tillpayments.com/api/v3
+        description: Production Direct PCI V3 (secure host)

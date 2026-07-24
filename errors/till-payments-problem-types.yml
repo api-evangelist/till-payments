@@ -1,0 +1,55 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/till-payments-gateway.yml, openapi/till-payments-direct-pci.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+format: custom-json
+envelope:
+  description: >-
+    Till Payments does not use RFC 9457 problem+json. Errors are returned inside
+    the standard transaction response: success=false with returnType=ERROR (for
+    transaction-level failures) or a top-level {success:false, errorCode,
+    errorMessage} object (for request/auth-level failures). Detailed failures are
+    listed in the errors[] array. Branch application logic on the numeric
+    errorCode, never on the human-readable errorMessage (which can vary).
+  fields:
+    - name: success
+      type: boolean
+    - name: returnType
+      type: string
+      values: [FINISHED, REDIRECT, HTML, PENDING, PENDING_DCC, ERROR]
+    - name: errors
+      type: array
+      items:
+        - errorCode: integer   # stable, branch on this
+        - errorMessage: string # human-readable, may vary
+        - adapterMessage: string # upstream acquirer/adapter message
+        - adapterCode: string    # upstream acquirer/adapter code
+problems:
+  - errorCode: 1000
+    title: Request failed
+    meaning: Generic request failure.
+    source: docs (gateway apiv3 reference)
+  - errorCode: 1002
+    title: Validation error
+    meaning: "A required field is missing or invalid (e.g. root: 'amount' is required)."
+    remediation: Correct the request body to satisfy the schema before retrying.
+    source: openapi example responses
+  - errorCode: 1003
+    title: Transaction / adapter error
+    meaning: General transaction processing error surfaced from the payment adapter (adapterMessage/adapterCode carry upstream detail).
+    source: openapi example responses
+  - errorCode: 1004
+    title: Signature invalid
+    meaning: The optional HMAC-SHA512 request signature failed validation.
+    remediation: Verify the signing secret and canonicalization used to compute the signature.
+    source: docs (gateway apiv3 reference)
+  - errorCode: 3004
+    title: Duplicate transaction id
+    meaning: The supplied merchantTransactionId already exists ("The transaction ID '...' already exists!"). This is the idempotency/duplicate-suppression guard.
+    remediation: Generate a new unique merchantTransactionId, or fetch the prior result via transactionStatusByMerchantTransactionId.
+    source: openapi example responses
+note: >-
+  This catalog captures the error envelope and the error codes verified in the
+  published OpenAPI examples and the V3 reference. Till/Nuvei does not publish a
+  complete numeric error-code table on the public developer surface; adapterCode
+  values are acquirer-specific and delivered per transaction.

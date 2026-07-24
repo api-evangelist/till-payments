@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Till Payments Gateway
+  version: 1.0.0
+extends: openapi/till-payments-gateway.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: till-payments
+      x-apievangelist-auth: http-basic + apiKey path param + optional HMAC-SHA512 request signing
+      x-apievangelist-idempotency:
+        supported: true
+        field: merchantTransactionId
+        duplicate-error-code: 3004
+      x-apievangelist-callbacks:
+        field: callbackUrl
+        note: Final transaction status is delivered asynchronously; trust the callback over the browser redirect.
+      x-apievangelist-artifacts:
+        conventions: conventions/till-payments-conventions.yml
+        errors: errors/till-payments-problem-types.yml
+        webhooks: asyncapi/till-payments-callbacks-webhooks.yml
+        authentication: authentication/till-payments-authentication.yml
+  - target: $.servers
+    update:
+      - url: https://gateway.tillpayments.com/api/v3
+        description: Production Gateway V3

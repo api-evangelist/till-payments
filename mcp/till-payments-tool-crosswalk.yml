@@ -1,0 +1,56 @@
+generated: '2026-07-24'
+method: derived
+source: mcp/till-payments-mcp.yml, openapi/till-payments-gateway.yml
+summary: >-
+  Crosswalk binding each candidate MCP tool to its backing Gateway V3 OpenAPI
+  operationId. Because the MCP surface is derived 1:1 from the OpenAPI (no
+  published server, no GraphQL), every tool maps with high confidence to exactly
+  one REST operation and inherits that operation's parameters + requestBody as its
+  real inputSchema. No mcp_only tools; the Direct PCI spec re-exposes a subset of
+  the same operations on secure.tillpayments.com.
+surfaces:
+  openapi:
+    - path: openapi/till-payments-gateway.yml
+      host: https://gateway.tillpayments.com/api/v3
+    - path: openapi/till-payments-direct-pci.yml
+      host: https://secure.tillpayments.com/api/v3
+  graphql: null
+  mcp:
+    url: null
+    status: candidate-derived
+    gated: false
+crosswalk:
+  - {tool: process_debit, category: payments, rest: [processDebit], binding: rest, confidence: high}
+  - {tool: prepare_debit, category: payments, rest: [processPrepareDebit], binding: rest, confidence: high}
+  - {tool: process_preauthorize, category: payments, rest: [processPreauthorize], binding: rest, confidence: high}
+  - {tool: prepare_preauthorize, category: payments, rest: [processPreparePreauthorize], binding: rest, confidence: high}
+  - {tool: process_incremental_authorization, category: payments, rest: [processIncrementalAuthorization], binding: rest, confidence: high}
+  - {tool: process_capture, category: payments, rest: [processCapture], binding: rest, confidence: high}
+  - {tool: process_void, category: payments, rest: [processVoid], binding: rest, confidence: high}
+  - {tool: process_refund, category: payments, rest: [processRefund], binding: rest, confidence: high}
+  - {tool: process_payout, category: payments, rest: [processPayout], binding: rest, confidence: high}
+  - {tool: process_register, category: tokenization, rest: [processRegister], binding: rest, confidence: high}
+  - {tool: prepare_register, category: tokenization, rest: [processPrepareRegister], binding: rest, confidence: high}
+  - {tool: process_deregister, category: tokenization, rest: [processDeregister], binding: rest, confidence: high}
+  - {tool: continue_dcc, category: payments, rest: [processContinueDcc], binding: rest, confidence: high}
+  - {tool: start_schedule, category: recurring, rest: [startSchedule], binding: rest, confidence: high}
+  - {tool: update_schedule, category: recurring, rest: [updateSchedule], binding: rest, confidence: high}
+  - {tool: get_schedule, category: recurring, rest: [getSchedule], binding: rest, confidence: high}
+  - {tool: pause_schedule, category: recurring, rest: [pauseSchedule], binding: rest, confidence: high}
+  - {tool: continue_schedule, category: recurring, rest: [continueSchedule], binding: rest, confidence: high}
+  - {tool: cancel_schedule, category: recurring, rest: [cancelSchedule], binding: rest, confidence: high}
+  - {tool: transaction_status_by_uuid, category: status, rest: [transactionStatusByUuid], binding: rest, confidence: high}
+  - {tool: transaction_status_by_merchant_transaction_id, category: status, rest: [transactionStatusByMerchantTransactionId], binding: rest, confidence: high}
+  - {tool: options, category: metadata, rest: [options], binding: rest, confidence: high}
+  - {tool: accept_dispute, category: disputes, rest: [accept], binding: rest, confidence: high}
+  - {tool: dispute_metadata, category: disputes, rest: [disputeMetadata], binding: rest, confidence: high}
+  - {tool: upload_dispute_evidence, category: disputes, rest: [uploadDisputeEvidence], binding: rest, confidence: high}
+  - {tool: submit_dispute_evidence, category: disputes, rest: [submitDisputeEvidence], binding: rest, confidence: high}
+mcp_only: []
+rest_only: []
+coverage:
+  tools_named: 26
+  tools_bound: 26
+  mcp_only: 0
+  rest_ops_total: 26
+  rest_ops_with_tool: 26

@@ -1,0 +1,65 @@
+arazzo: 1.0.1
+info:
+  title: Till Payments — authorize and capture
+  version: 1.0.0
+  summary: Preauthorize a card payment, then capture the reserved funds, on the Till Payments Gateway V3 API.
+sourceDescriptions:
+  - name: gateway
+    url: ../openapi/till-payments-gateway.yml
+    type: openapi
+workflows:
+  - workflowId: authorizeAndCapture
+    summary: Reserve funds with a preauthorization then settle them with a capture.
+    inputs:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Per-connector API key (path parameter).
+        merchantTransactionId:
+          type: string
+          description: Unique merchant transaction id for the authorization.
+        amount:
+          type: string
+        currency:
+          type: string
+        transactionToken:
+          type: string
+          description: Stored payment instrument token (ix::...).
+    steps:
+      - stepId: preauthorize
+        description: Authorize (reserve) funds.
+        operationId: processPreauthorize
+        parameters:
+          - name: apiKey
+            in: path
+            value: $inputs.apiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            merchantTransactionId: $inputs.merchantTransactionId
+            amount: $inputs.amount
+            currency: $inputs.currency
+            transactionToken: $inputs.transactionToken
+        outputs:
+          uuid: $response.body#/uuid
+          returnType: $response.body#/returnType
+      - stepId: capture
+        description: Capture the previously authorized amount.
+        operationId: processCapture
+        parameters:
+          - name: apiKey
+            in: path
+            value: $inputs.apiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            merchantTransactionId: $inputs.merchantTransactionId
+            referenceUuid: $steps.preauthorize.outputs.uuid
+            amount: $inputs.amount
+            currency: $inputs.currency
+        outputs:
+          captureUuid: $response.body#/uuid
+    outputs:
+      authorizationUuid: $steps.preauthorize.outputs.uuid
+      captureUuid: $steps.capture.outputs.captureUuid

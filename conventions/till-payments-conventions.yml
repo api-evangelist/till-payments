@@ -1,0 +1,68 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/till-payments-gateway.yml, openapi/till-payments-direct-pci.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+summary: >-
+  Cross-cutting request/response conventions for the Till Payments V3 Gateway and
+  Direct PCI APIs. Both are JSON-over-HTTPS (TLS 1.2+), authenticated with HTTP
+  Basic plus a per-connector apiKey path parameter, and share one asynchronous
+  transaction model: a request returns a returnType (FINISHED / REDIRECT / HTML /
+  PENDING / PENDING_DCC / ERROR) and the definitive outcome is delivered by an
+  asynchronous status notification to the merchant-supplied callbackUrl.
+authentication:
+  style: http-basic
+  detail: Base64(username:password) in Authorization header; per-connector apiKey in path; optional HMAC-SHA512 request signing.
+  artifact: authentication/till-payments-authentication.yml
+idempotency:
+  supported: true
+  mechanism: merchant-supplied-transaction-id
+  field: merchantTransactionId
+  scope: per-connector transaction namespace
+  behavior: >-
+    merchantTransactionId is a required, merchant-generated unique identifier on
+    every transaction request. Re-submitting a request that reuses an existing
+    merchantTransactionId is rejected by the gateway rather than double-processed
+    — errorCode 3004 ("The transaction ID '...' already exists!"). This makes the
+    field the retry-safety / duplicate-suppression key for the API.
+  evidence:
+    - openapi/till-payments-gateway.yml#/components/schemas/* (merchantTransactionId required)
+    - errorCode 3004 duplicate-transaction rejection (errors/till-payments-problem-types.yml)
+  header: null
+  note: There is no separate Idempotency-Key header; merchantTransactionId is the idempotency contract.
+pagination:
+  supported: false
+  note: The transaction and schedule APIs are single-resource operations; no list pagination surface.
+versioning:
+  style: uri-path
+  current: v3
+  base_paths:
+    - https://gateway.tillpayments.com/api/v3
+    - https://secure.tillpayments.com/api/v3
+  artifact: lifecycle/till-payments-lifecycle.yml
+request_tracing:
+  supported: partial
+  fields:
+    - uuid (gateway-assigned transaction id, returned on the response and usable via status-by-uuid)
+    - purchaseId (gateway purchase reference)
+    - merchantTransactionId (merchant correlation id)
+  status_lookup:
+    - transactionStatusByUuid
+    - transactionStatusByMerchantTransactionId
+error_envelope:
+  shape: >-
+    Responses carry success (bool), returnType, and an errors[] array of
+    {errorCode:int, errorMessage:string, adapterMessage:string, adapterCode:string}.
+    Clients should branch on the numeric errorCode, not on errorMessage text.
+  format: custom-json
+  artifact: errors/till-payments-problem-types.yml
+callbacks:
+  supported: true
+  field: callbackUrl
+  behavior: >-
+    For REDIRECT and PENDING flows the gateway POSTs the final transaction status
+    to callbackUrl once a definitive state is reached. Docs guidance: "For the
+    final result you should only trust the notification, NOT the back redirection."
+  artifact: asyncapi/till-payments-callbacks-webhooks.yml
+rate_limit_signaling:
+  documented: false
+  note: No published rate-limit headers or quota reference found at review time.

@@ -1,0 +1,93 @@
+generated: '2026-07-24'
+method: derived
+status: candidate
+source: openapi/till-payments-gateway.yml
+summary: >-
+  No official hosted/remote Till Payments MCP server was found (developer hub,
+  npm @modelcontextprotocol, MCP registries all miss). This is a DERIVED candidate
+  tool surface — one tool per Gateway V3 operationId — provided as a starting point
+  for an agent-facing wrapper. Each tool inherits its real input contract from the
+  backing OpenAPI operation's parameters + requestBody. Not a published server.
+server:
+  name: till-payments
+  transport: http
+  url: null
+tools:
+  - name: process_debit
+    description: Process a debit (immediate charge).
+    source_operation: openapi/till-payments-gateway.yml#processDebit
+  - name: prepare_debit
+    description: Prepare a debit transaction.
+    source_operation: openapi/till-payments-gateway.yml#processPrepareDebit
+  - name: process_preauthorize
+    description: Authorize (reserve) funds for later capture.
+    source_operation: openapi/till-payments-gateway.yml#processPreauthorize
+  - name: prepare_preauthorize
+    description: Prepare a preauthorization.
+    source_operation: openapi/till-payments-gateway.yml#processPreparePreauthorize
+  - name: process_incremental_authorization
+    description: Increase the amount on an existing authorization.
+    source_operation: openapi/till-payments-gateway.yml#processIncrementalAuthorization
+  - name: process_capture
+    description: Capture a previously authorized transaction.
+    source_operation: openapi/till-payments-gateway.yml#processCapture
+  - name: process_void
+    description: Void/cancel an authorization or transaction.
+    source_operation: openapi/till-payments-gateway.yml#processVoid
+  - name: process_refund
+    description: Refund a settled transaction.
+    source_operation: openapi/till-payments-gateway.yml#processRefund
+  - name: process_payout
+    description: Push a payout to a payment instrument.
+    source_operation: openapi/till-payments-gateway.yml#processPayout
+  - name: process_register
+    description: Register/tokenize a payment instrument.
+    source_operation: openapi/till-payments-gateway.yml#processRegister
+  - name: prepare_register
+    description: Prepare a registration/tokenization.
+    source_operation: openapi/till-payments-gateway.yml#processPrepareRegister
+  - name: process_deregister
+    description: Remove a stored payment instrument token.
+    source_operation: openapi/till-payments-gateway.yml#processDeregister
+  - name: continue_dcc
+    description: Continue a Dynamic Currency Conversion flow.
+    source_operation: openapi/till-payments-gateway.yml#processContinueDcc
+  - name: start_schedule
+    description: Start a recurring transaction schedule.
+    source_operation: openapi/till-payments-gateway.yml#startSchedule
+  - name: update_schedule
+    description: Update a recurring schedule.
+    source_operation: openapi/till-payments-gateway.yml#updateSchedule
+  - name: get_schedule
+    description: Retrieve a schedule.
+    source_operation: openapi/till-payments-gateway.yml#getSchedule
+  - name: pause_schedule
+    description: Pause a schedule.
+    source_operation: openapi/till-payments-gateway.yml#pauseSchedule
+  - name: continue_schedule
+    description: Resume a paused schedule.
+    source_operation: openapi/till-payments-gateway.yml#continueSchedule
+  - name: cancel_schedule
+    description: Cancel a schedule.
+    source_operation: openapi/till-payments-gateway.yml#cancelSchedule
+  - name: transaction_status_by_uuid
+    description: Look up transaction status by gateway uuid.
+    source_operation: openapi/till-payments-gateway.yml#transactionStatusByUuid
+  - name: transaction_status_by_merchant_transaction_id
+    description: Look up transaction status by merchantTransactionId.
+    source_operation: openapi/till-payments-gateway.yml#transactionStatusByMerchantTransactionId
+  - name: options
+    description: Retrieve connector options.
+    source_operation: openapi/till-payments-gateway.yml#options
+  - name: accept_dispute
+    description: Accept a dispute.
+    source_operation: openapi/till-payments-gateway.yml#accept
+  - name: dispute_metadata
+    description: Submit dispute metadata.
+    source_operation: openapi/till-payments-gateway.yml#disputeMetadata
+  - name: upload_dispute_evidence
+    description: Upload dispute evidence.
+    source_operation: openapi/till-payments-gateway.yml#uploadDisputeEvidence
+  - name: submit_dispute_evidence
+    description: Submit dispute evidence for review.
+    source_operation: openapi/till-payments-gateway.yml#submitDisputeEvidence

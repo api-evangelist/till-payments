@@ -1,0 +1,46 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/till-payments-direct-pci.yml, openapi/till-payments-gateway.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+summary:
+  types:
+  - http
+  http_schemes:
+  - basic
+  api_key_in:
+  - path
+  request_signing: optional
+notes: >-
+  Every Till Payments Gateway and Direct PCI request authenticates with HTTP
+  Basic credentials over TLS 1.2+. The API username and password are joined by a
+  colon and Base64-encoded into the Authorization: Basic header (docs example:
+  anyApiUser:myPassword -> Authorization: Basic YW55QXBpVXNlcjpteVBhc3N3b3Jk). In
+  addition, every transaction endpoint carries a per-connector apiKey as a path
+  parameter (/api/v3/transaction/{apiKey}/debit). Request signing is optionally
+  available and recommended: an HMAC-SHA512 signature (Base64) enabled per
+  connector via the "API: Enable Request Signing" setting. No OAuth2/OIDC surface
+  is exposed, so there is no scope model.
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/till-payments-direct-pci.yml
+  - openapi/till-payments-gateway.yml
+- name: apiKey
+  type: apiKey
+  in: path
+  parameter: apiKey
+  description: Per-connector API key embedded as a path segment on every transaction endpoint.
+  sources:
+  - openapi/till-payments-gateway.yml
+  - openapi/till-payments-direct-pci.yml
+- name: requestSignature
+  type: signature
+  algorithm: HMAC-SHA512
+  encoding: base64
+  required: false
+  description: >-
+    Optional, connector-enabled request signing ("API: Enable Request Signing").
+    Recommended for production integrations to verify request integrity.
+  source: https://gateway.tillpayments.com/documentation/apiv3

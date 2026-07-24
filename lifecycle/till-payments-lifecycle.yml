@@ -1,0 +1,24 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/till-payments-gateway.yml, apis.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+versioning:
+  scheme: uri-path
+  current: v3
+  bases:
+    - https://gateway.tillpayments.com/api/v3
+    - https://secure.tillpayments.com/api/v3
+  docs: https://gateway.tillpayments.com/documentation/apiv3
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or RFC 8594 Sunset/Deprecation header support documented at review time.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.tillpayments.com/
+deprecated_operations: []
+note: >-
+  Till is a stable major-version (V3) URI-versioned API. Following the 2024 Nuvei
+  acquisition the developer surface is migrating under Nuvei; no formal deprecation
+  calendar or SLA document is published on the public developer hub.

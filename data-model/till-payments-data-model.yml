@@ -1,0 +1,92 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/till-payments-gateway.yml
+summary: >-
+  Entity-relationship graph derived from the Till Payments Gateway V3 OpenAPI
+  schema $ref graph. The transaction is the core aggregate; value objects (Amount,
+  Currency, Customer, payment instruments) compose into each transaction request,
+  and TransactionResponse is the shared outcome envelope (also delivered via
+  callback). A Schedule drives recurring transactions.
+entities:
+  - name: Transaction
+    role: core-aggregate
+    represented_by:
+      - Debit
+      - Preauthorize
+      - Capture
+      - Void
+      - Refund
+      - Payout
+      - IncrementalAuthorization
+    key_fields: [merchantTransactionId, uuid, purchaseId]
+    note: uuid is gateway-assigned; merchantTransactionId is the merchant-supplied unique key.
+  - name: TransactionResponse
+    role: outcome-envelope
+    key_fields: [success, uuid, returnType, errors]
+  - name: Register
+    role: tokenization
+    produces: "transactionToken (ix:: prefixed)"
+    note: Stores a payment instrument for later reference / recurring use; Deregister removes it.
+  - name: Schedule
+    role: recurring
+    key_fields: [scheduleId]
+    represented_by: [StartSchedule, UpdateSchedule, PauseSchedule, ContinueSchedule, CancelSchedule, ScheduleResponse]
+  - name: Customer
+    role: value-object
+  - name: Dispute
+    role: process
+    represented_by: [DisputeAcceptRequest, DisputeMetadataRequest, DisputeUploadEvidenceRequest, DisputeSubmitEvidenceRequest, DisputeResponse]
+value_objects: [Amount, Currency, Country, Customer, CustomerProfileData, ThreeDSecureData, DccData, ExtraData, Items, Splits, L2L3Data, IbanData, WalletData, PaymentData, TracingData]
+relationships:
+  - from: Transaction
+    to: Amount
+    type: has_one
+    via: amount
+  - from: Transaction
+    to: Currency
+    type: has_one
+    via: currency
+  - from: Transaction
+    to: Customer
+    type: has_one
+    via: customer
+  - from: Transaction
+    to: transactionToken (Register)
+    type: belongs_to
+    via: transactionToken
+  - from: Capture
+    to: Preauthorize
+    type: belongs_to
+    via: referenceUuid
+  - from: Refund
+    to: Transaction
+    type: belongs_to
+    via: referenceUuid
+  - from: Void
+    to: Preauthorize
+    type: belongs_to
+    via: referenceUuid
+  - from: Schedule
+    to: Register
+    type: has_one
+    via: transactionToken
+  - from: Transaction
+    to: TransactionResponse
+    type: has_one
+    via: response/callback
+  - from: Transaction
+    to: ThreeDSecureData
+    type: has_one
+    via: threeDSecureData
+  - from: Transaction
+    to: DccData
+    type: has_one
+    via: dccData
+id_conventions:
+  - field: uuid
+    note: Gateway-assigned transaction identifier; use with transactionStatusByUuid.
+  - field: transactionToken
+    prefix: "ix::"
+    note: Tokenized payment instrument reference (IXOPAY-lineage gateway).
+  - field: merchantTransactionId
+    note: Merchant-supplied unique transaction id; duplicate reuse rejected (errorCode 3004).

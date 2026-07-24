@@ -1,0 +1,62 @@
+arazzo: 1.0.1
+info:
+  title: Till Payments — tokenize and charge
+  version: 1.0.0
+  summary: Register (tokenize) a payment instrument, then charge it with a debit using the returned transactionToken.
+sourceDescriptions:
+  - name: gateway
+    url: ../openapi/till-payments-gateway.yml
+    type: openapi
+workflows:
+  - workflowId: tokenizeAndCharge
+    summary: Store a card once with register, then debit it using the stored token.
+    inputs:
+      type: object
+      properties:
+        apiKey:
+          type: string
+        registerTransactionId:
+          type: string
+          description: Unique merchant transaction id for the registration.
+        chargeTransactionId:
+          type: string
+          description: Unique merchant transaction id for the debit.
+        amount:
+          type: string
+        currency:
+          type: string
+    steps:
+      - stepId: register
+        description: Register / tokenize the payment instrument.
+        operationId: processRegister
+        parameters:
+          - name: apiKey
+            in: path
+            value: $inputs.apiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            merchantTransactionId: $inputs.registerTransactionId
+        outputs:
+          transactionToken: $response.body#/returnData/transactionToken
+          registerUuid: $response.body#/uuid
+      - stepId: debit
+        description: Charge the tokenized instrument.
+        operationId: processDebit
+        parameters:
+          - name: apiKey
+            in: path
+            value: $inputs.apiKey
+        requestBody:
+          contentType: application/json
+          payload:
+            merchantTransactionId: $inputs.chargeTransactionId
+            transactionToken: $steps.register.outputs.transactionToken
+            amount: $inputs.amount
+            currency: $inputs.currency
+        outputs:
+          debitUuid: $response.body#/uuid
+          returnType: $response.body#/returnType
+    outputs:
+      transactionToken: $steps.register.outputs.transactionToken
+      debitUuid: $steps.debit.outputs.debitUuid

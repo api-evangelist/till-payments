@@ -1,0 +1,46 @@
+generated: '2026-07-24'
+method: searched
+source: openapi/till-payments-gateway.yml, openapi/till-payments-direct-pci.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+spec_type: Webhooks
+summary: >-
+  Till Payments delivers transaction outcomes through asynchronous status
+  notifications (callbacks) rather than a subscription webhook console. Each
+  transaction request may carry a merchant-supplied callbackUrl; the gateway POSTs
+  the final transaction status to that URL once the transaction reaches a
+  definitive state. The docs are explicit that the callback — not the browser
+  back-redirect — is the source of truth for the final result.
+delivery:
+  mechanism: per-transaction callbackUrl (HTTP POST)
+  configured_via: callbackUrl field on the transaction request body
+  reliability_note: >-
+    "For the final result you should only trust the notification, NOT the back
+    redirection." Notifications are sent for REDIRECT and PENDING flows once a
+    final state is reached, and for FINISHED / ERROR outcomes.
+  payload: >-
+    The notification body mirrors the transaction response
+    (components.schemas.TransactionResponse): success, uuid, purchaseId,
+    returnType, paymentMethod, returnData, riskCheckData, errors[], etc.
+events:
+  - name: transaction.status.success
+    trigger: A transaction reaches a successful final state (returnType FINISHED).
+    channel: merchant callbackUrl
+  - name: transaction.status.error
+    trigger: A transaction fails or is declined (returnType ERROR; see errors[]).
+    channel: merchant callbackUrl
+  - name: transaction.status.pending-final
+    trigger: A previously PENDING or REDIRECT transaction reaches its final state.
+    channel: merchant callbackUrl
+  - name: account.updater.notification
+    trigger: Account Updater result notification (updated card credentials on file).
+    channel: merchant callbackUrl
+  - name: network.token.notification
+    trigger: Network Token result notification.
+    channel: merchant callbackUrl
+verification:
+  approach: Fetch authoritative status via transactionStatusByUuid or transactionStatusByMerchantTransactionId; optional HMAC-SHA512 request signing applies to the notification integrity model.
+asyncapi_spec: null
+note: >-
+  No downloadable AsyncAPI document is published; this is a derived webhook/event
+  catalog from the V3 reference and OpenAPI. Emitted as type Webhooks (event
+  surface present) — not a fabricated AsyncAPI spec.

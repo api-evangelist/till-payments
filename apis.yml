@@ -50,6 +50,12 @@ apis:
     url: https://gateway.tillpayments.com/documentation/gateway
   - type: APIReference
     url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: MCPServer
+    url: mcp/till-payments-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Overlay
+    url: overlays/till-payments-gateway-overlay.yaml
 - aid: till-payments:till-payments-direct-pci
   name: Till Payments Direct PCI-enabled API
   description: >-
@@ -70,6 +76,8 @@ apis:
     url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
   - type: APIReference
     url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: Overlay
+    url: overlays/till-payments-direct-pci-overlay.yaml
 - aid: till-payments:till-payments-pay-by-link
   name: Till Payments Pay By Link API
   description: >-
@@ -100,6 +108,36 @@ apis:
   - type: Documentation
     url: https://docs.tillpayments.com/guides/terminal-connect/getting-started/
 common:
+- type: AgenticAccess
+  url: agentic-access/till-payments-agentic-access.yml
+- type: DomainSecurity
+  url: security/till-payments-domain-security.yml
+- type: Authentication
+  url: authentication/till-payments-authentication.yml
+- type: Conventions
+  url: conventions/till-payments-conventions.yml
+- type: Idempotency
+  url: conventions/till-payments-conventions.yml
+- type: ErrorCatalog
+  url: errors/till-payments-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/till-payments-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/till-payments-callbacks-webhooks.yml
+- type: DataModel
+  url: data-model/till-payments-data-model.yml
+- type: Conformance
+  url: conformance/till-payments-conformance.yml
+- type: LLMsTxt
+  url: llms/till-payments-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Authorize and capture
+  url: arazzo/till-payments-authorize-and-capture.yml
+- type: Arazzo
+  name: Tokenize and charge
+  url: arazzo/till-payments-tokenize-and-charge.yml
 - type: Website
   url: https://tillpayments.com/
 - type: DeveloperPortal

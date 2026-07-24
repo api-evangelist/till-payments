@@ -1,0 +1,43 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/till-payments-gateway.yml, openapi/till-payments-direct-pci.yml
+docs: https://gateway.tillpayments.com/documentation/apiv3
+standards:
+  - id: http-basic-auth
+    conforms: true
+    evidence: openapi securitySchemes type http scheme basic (both specs)
+  - id: tls-1.2-plus
+    conforms: true
+    evidence: All hosts negotiate TLS 1.3; docs mandate TLS 1.2+ for the Direct PCI API.
+  - id: pci-dss
+    conforms: true
+    evidence: >-
+      Till is a card acquirer; the Direct PCI-enabled Payment Platform API is
+      explicitly gated to merchants that hold PCI DSS certification to transmit
+      raw cardholder data, and the hosted Gateway offloads PCI scope via
+      tokenization (transactionToken / register).
+  - id: emv-3ds
+    conforms: true
+    evidence: >-
+      3-D Secure flows present — ThreeDSecureData schema, returnType 3ds redirect,
+      riskCheckData.threeDSecureRequired.
+  - id: dcc
+    conforms: true
+    evidence: Dynamic Currency Conversion flow (continue-dcc operation, DccData / ContinueDcc schemas, PENDING_DCC returnType).
+  - id: hmac-request-signing
+    conforms: true
+    evidence: 'Optional HMAC-SHA512 request signing ("API: Enable Request Signing").'
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Custom errors[] envelope with numeric errorCode; not application/problem+json.
+  - id: oauth2
+    conforms: false
+  - id: openid-connect
+    conforms: false
+  - id: json-api
+    conforms: false
+note: >-
+  Derived conformance assertions from the OpenAPI and V3 reference. PCI DSS here
+  reflects the acquirer/product posture (the Direct API is PCI-gated); Till/Nuvei
+  does not expose a standalone public certifications/trust page, so no Compliance
+  link pointer is emitted.

@@ -1,0 +1,33 @@
+# Till Payments
+
+> Till Payments is a Sydney, Australia founded merchant acquirer and payment technology company (est. 2012, acquired by Nuvei in 2024). It provides integrated card-present and card-not-present payments for ISVs, platforms, and omnichannel merchants across online, in-person, and unattended channels. Its API-first surface centers on a V3 Gateway API and a PCI-enabled Direct API, both JSON over HTTPS (TLS 1.2+) with HTTP Basic authentication and a per-connector apiKey path parameter, plus asynchronous status callbacks.
+
+## APIs
+
+- [Till Payments Gateway API](https://gateway.tillpayments.com/documentation/apiv3): V3 card-present/card-not-present processing — debit, preauthorize, capture, void, refund, payout, register/tokenize, recurring schedules, 3-D Secure/DCC, disputes, and status lookup. Base: https://gateway.tillpayments.com/api/v3
+- [Till Payments Direct PCI-enabled API](https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api): V3 direct processing for PCI DSS-certified merchants transmitting raw cardholder data. Base: https://secure.tillpayments.com/api/v3
+- [Till Payments Pay By Link](https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/): Shareable hosted payment links (no downloadable OpenAPI published).
+- [Till Payments Terminal Connect](https://docs.tillpayments.com/guides/terminal-connect/getting-started/): In-person POS-to-terminal integration (no downloadable OpenAPI published).
+
+## Specs
+
+- [Gateway OpenAPI 3.0](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/openapi/till-payments-gateway.yml)
+- [Direct PCI OpenAPI 3.0](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/openapi/till-payments-direct-pci.yml)
+
+## Artifacts
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/authentication/till-payments-authentication.yml): HTTP Basic + apiKey path param + optional HMAC-SHA512 request signing.
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/conventions/till-payments-conventions.yml): idempotency via merchantTransactionId, async callbacks, URI versioning.
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/errors/till-payments-problem-types.yml): errors[] envelope, numeric errorCode (1000/1002/1003/1004/3004).
+- [Webhook / callback catalog](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/asyncapi/till-payments-callbacks-webhooks.yml)
+- [Data model / ERD](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/data-model/till-payments-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/conformance/till-payments-conformance.yml)
+- [Candidate MCP tools](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/mcp/till-payments-mcp.yml)
+- [Agent skills index](https://raw.githubusercontent.com/api-evangelist/till-payments/refs/heads/main/skills/_index.yml)
+
+## Docs
+
+- [Developer Hub](https://tillpayments.com/developer-hub)
+- [Gateway V3 Reference](https://gateway.tillpayments.com/documentation/apiv3)
+- [Documentation & Guides](https://docs.tillpayments.com/guides)
+- [Status Page](https://status.tillpayments.com/)

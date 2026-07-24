@@ -1,0 +1,20 @@
+generated: '2026-07-24'
+method: generated
+source: openapi/till-payments-gateway.yml
+skills:
+  - file: till-payments-authorize-and-capture.md
+    name: Authorize and capture a card payment
+    api: openapi/till-payments-gateway.yml
+    operations: [processPreauthorize, processCapture, processVoid, transactionStatusByUuid]
+  - file: till-payments-tokenize-and-charge.md
+    name: Tokenize a card and charge it
+    api: openapi/till-payments-gateway.yml
+    operations: [processRegister, processPrepareRegister, processDebit, processDeregister]
+  - file: till-payments-refund-and-reconcile.md
+    name: Refund a transaction and reconcile status
+    api: openapi/till-payments-gateway.yml
+    operations: [processRefund, transactionStatusByUuid, transactionStatusByMerchantTransactionId]
+  - file: till-payments-recurring-schedule.md
+    name: Run a recurring payment schedule
+    api: openapi/till-payments-gateway.yml
+    operations: [startSchedule, getSchedule, pauseSchedule, continueSchedule, cancelSchedule, updateSchedule]

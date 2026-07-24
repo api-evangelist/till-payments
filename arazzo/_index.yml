@@ -1,0 +1,12 @@
+generated: '2026-07-24'
+method: derived
+source: openapi/till-payments-gateway.yml
+workflows:
+  - file: till-payments-authorize-and-capture.yml
+    workflowId: authorizeAndCapture
+    title: Authorize and capture
+    summary: Preauthorize a card payment then capture the reserved funds.
+  - file: till-payments-tokenize-and-charge.yml
+    workflowId: tokenizeAndCharge
+    title: Tokenize and charge
+    summary: Register a payment instrument then debit it with the returned transactionToken.
