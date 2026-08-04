@@ -17,7 +17,8 @@ surfaces:
   graphql: null
   mcp:
     url: null
-    status: candidate-derived
+    status: candidate
+    status_raw: candidate
     gated: false
 crosswalk:
   - {tool: process_debit, category: payments, rest: [processDebit], binding: rest, confidence: high}
