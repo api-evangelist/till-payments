@@ -1,0 +1,739 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Till Payments Gateway",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "prepare-transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process a prepare Debit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/prepare-debit",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a prepare Debit"
+        },
+        {
+          "info": {
+            "name": "Process a prepare Preauthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/prepare-preauthorize",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a prepare Preauthorize"
+        },
+        {
+          "info": {
+            "name": "Process a prepare Register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/prepare-register",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a prepare Register"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process a debit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/debit",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a debit"
+        },
+        {
+          "info": {
+            "name": "Process a preauthorize: reserves the payment amount on the customer's payment instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/preauthorize",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a preauthorize: reserves the payment amount on the customer's payment instrument"
+        },
+        {
+          "info": {
+            "name": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/incrementalAuthorization",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)"
+        },
+        {
+          "info": {
+            "name": "Process a capture: completes a payment previously authorized through Preauthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/capture",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a capture: completes a payment previously authorized through Preauthorize"
+        },
+        {
+          "info": {
+            "name": "Process a void: cancels a previously authorized Preauthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/void",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a void: cancels a previously authorized Preauthorize"
+        },
+        {
+          "info": {
+            "name": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/register",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)"
+        },
+        {
+          "info": {
+            "name": "Process a deregister: deletes a previously registered payment instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/deregister",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a deregister: deletes a previously registered payment instrument"
+        },
+        {
+          "info": {
+            "name": "Process a refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/refund",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a refund"
+        },
+        {
+          "info": {
+            "name": "Process a payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/payout",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a payout"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "continue-dcc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Continue a DCC transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/transaction/:apiKey/continue-dcc",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Continue a DCC transaction"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preauthorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/start",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preauthorize-with-register"
+        },
+        {
+          "info": {
+            "name": "Update a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preauthorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/:scheduleId/update",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the schedule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preauthorize-with-register"
+        },
+        {
+          "info": {
+            "name": "Retrieve a schedule. Requires the UUID of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/:scheduleId/get",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the schedule"
+              }
+            ]
+          },
+          "docs": "Retrieve a schedule. Requires the UUID of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register"
+        },
+        {
+          "info": {
+            "name": "Pause a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/:scheduleId/pause",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the schedule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pause a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register"
+        },
+        {
+          "info": {
+            "name": "Continue a schedule which has been paused. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/:scheduleId/continue",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the schedule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Continue a schedule which has been paused. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register"
+        },
+        {
+          "info": {
+            "name": "Cancel a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/schedule/:apiKey/:scheduleId/cancel",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the schedule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a schedule. Requires the registrationId of an existing transaction of type Register / Debit-with-register / Preuathorize-with-register"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve status of a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.tillpayments.com/api/v3/status/:apiKey/getByUuid/:uuid",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of transaction"
+              }
+            ]
+          },
+          "docs": "Retrieve status of a transaction"
+        },
+        {
+          "info": {
+            "name": "Retrieve status of a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.tillpayments.com/api/v3/status/:apiKey/getByMerchantTransactionId/:merchantTransactionId",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "merchantTransactionId",
+                "value": "",
+                "type": "path",
+                "description": "ID of merchant transaction"
+              }
+            ]
+          },
+          "docs": "Retrieve status of a transaction"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an options list based on given option name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/options/:apiKey/:optionsName",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              },
+              {
+                "name": "optionsName",
+                "value": "",
+                "type": "path",
+                "description": "Options identifier of the appropriate adapter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an options list based on given option name"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "dispute",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Accept",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/dispute/:apiKey/accept/:uuid",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API key of connector."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Uuid of Dispute"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You accept the open Dispute. The \"accept\" statement will be send to Provider and will lead to a Chargeback."
+        },
+        {
+          "info": {
+            "name": "Upload Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/dispute/:apiKey/upload-evidence/:uuid",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API key of connector."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Uuid of Dispute"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Upload Dispute Evidence Document to Provider"
+        },
+        {
+          "info": {
+            "name": "Submit Evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/dispute/:apiKey/submit-evidence/:uuid",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API key of connector."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Uuid of Dispute"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit all previous uploaded Dispute Evidence to Provider"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dispute",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.tillpayments.com/api/v3/dispute/:apiKey/metadata/:uuid",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API key of connector."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Uuid of Dispute"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch associated Dispute metadata from Provider"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

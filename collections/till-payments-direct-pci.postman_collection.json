@@ -1,0 +1,1089 @@
+{
+  "item": [
+    {
+      "id": "5c063864-ccfb-472e-bc72-924ca7fda212",
+      "name": "transaction",
+      "description": {
+        "content": "Process transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6dd5ccde-699d-4c3d-892c-c6183e3a61a2",
+          "name": "Process a debit",
+          "request": {
+            "name": "Process a debit",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "debit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"cardDetailsUpdate\": {\n    \"expiryMonth\": \"<string>\",\n    \"expiryYear\": \"<string>\"\n  },\n  \"referenceUuid\": \"<string>\",\n  \"surchargeAmount\": \"<string>\",\n  \"paymentToken\": {\n    \"cryptogram\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenExpirationDay\": \"<string>\",\n    \"tokenExpirationMonth\": \"<string>\",\n    \"tokenExpirationYear\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deviceManufacturerIdentifier\": \"<string>\",\n    \"paymentAccountReference\": \"<string>\",\n    \"eciIndicator\": \"<string>\"\n  },\n  \"successUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"errorUrl\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"transactionToken\": \"<string>\",\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ],\n  \"splits\": [\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"withRegister\": \"<boolean>\",\n  \"transactionIndicator\": \"<string>\",\n  \"customer\": {\n    \"identification\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"birthDate\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingPostcode\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingPhone\": \"<string>\",\n    \"shippingFirstName\": \"<string>\",\n    \"shippingLastName\": \"<string>\",\n    \"shippingCompany\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingPostcode\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingPhone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"email\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"ipAddress\": \"<string>\",\n    \"nationalId\": \"<string>\",\n    \"extraData\": {\n      \"key_0\": \"<string>\"\n    },\n    \"paymentData\": {\n      \"ibanData\": {\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\",\n        \"mandateId\": \"<string>\",\n        \"mandateDate\": \"<string>\"\n      }\n    }\n  },\n  \"schedule\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"periodLength\": \"<integer>\",\n    \"periodUnit\": \"<string>\",\n    \"startDateTime\": \"<string>\",\n    \"merchantMetaData\": \"<string>\",\n    \"callbackUrl\": \"<string>\"\n  },\n  \"customerProfileData\": {\n    \"profileGuid\": \"<string>\",\n    \"customerIdentification\": \"<string>\",\n    \"markAsPreferred\": \"<boolean>\"\n  },\n  \"threeDSecureData\": {\n    \"3dsecure\": \"<string>\",\n    \"schemeId\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"authenticationIndicator\": \"<string>\",\n    \"cardholderAuthenticationMethod\": \"<string>\",\n    \"cardholderAuthenticationDateTime\": \"<string>\",\n    \"cardHolderAuthenticationData\": \"<string>\",\n    \"challengeIndicator\": \"<string>\",\n    \"priorReference\": \"<string>\",\n    \"priorAuthenticationMethod\": \"<string>\",\n    \"priorAuthenticationDateTime\": \"<string>\",\n    \"priorAuthenticationData\": \"<string>\",\n    \"cardholderAccountType\": \"<string>\",\n    \"cardholderAccountAgeIndicator\": \"<string>\",\n    \"cardholderAccountDate\": \"<string>\",\n    \"cardholderAccountChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastChange\": \"<string>\",\n    \"cardholderAccountPasswordChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastPasswordChange\": \"<string>\",\n    \"shippingAddressUsageIndicator\": \"<string>\",\n    \"shippingAddressFirstUsage\": \"<string>\",\n    \"transactionActivityDay\": \"<number>\",\n    \"transactionActivityYear\": \"<number>\",\n    \"addCardAttemptsDay\": \"<number>\",\n    \"purchaseCountSixMonths\": \"<number>\",\n    \"suspiciousAccountActivityIndicator\": \"<string>\",\n    \"shippingNameEqualIndicator\": \"<string>\",\n    \"paymentAccountAgeIndicator\": \"<string>\",\n    \"paymentAccountAgeDate\": \"<string>\",\n    \"billingAddressLine3\": \"<string>\",\n    \"shippingAddressLine3\": \"<string>\",\n    \"billingShippingAddressMatch\": \"<string>\",\n    \"homePhoneCountryPrefix\": \"<string>\",\n    \"homePhoneNumber\": \"<string>\",\n    \"mobilePhoneCountryPrefix\": \"<string>\",\n    \"mobilePhoneNumber\": \"<string>\",\n    \"workPhoneCountryPrefix\": \"<string>\",\n    \"workPhoneNumber\": \"<string>\",\n    \"purchaseInstalData\": \"<number>\",\n    \"shipIndicator\": \"<string>\",\n    \"deliveryTimeframe\": \"<string>\",\n    \"deliveryEmailAddress\": \"<string>\",\n    \"reorderItemsIndicator\": \"<string>\",\n    \"preOrderPurchaseIndicator\": \"<string>\",\n    \"preOrderDate\": \"<string>\",\n    \"giftCardAmount\": \"<number>\",\n    \"giftCardCurrency\": \"<string>\",\n    \"giftCardCount\": \"<number>\",\n    \"purchaseDate\": \"<string>\",\n    \"recurringExpiry\": \"<string>\",\n    \"recurringFrequency\": \"<number>\",\n    \"transType\": \"<string>\",\n    \"exemptionIndicator\": \"<string>\",\n    \"threeRIIndicator\": \"<string>\",\n    \"browserChallengeWindowSize\": \"<string>\",\n    \"browserAcceptHeader\": \"<string>\",\n    \"browserIpAddress\": \"<string>\",\n    \"browserJavaEnabled\": \"<boolean>\",\n    \"browserLanguage\": \"<string>\",\n    \"browserColorDepth\": \"<integer>\",\n    \"browserScreenHeight\": \"<number>\",\n    \"browserScreenWidth\": \"<number>\",\n    \"browserTimezone\": \"<integer>\",\n    \"browserUserAgent\": \"<string>\",\n    \"browserPlatform\": \"<string>\",\n    \"sdkInterface\": \"<string>\",\n    \"sdkUiType\": \"<string>\",\n    \"sdkAppID\": \"<string>\",\n    \"sdkEncData\": \"<string>\",\n    \"sdkEphemPubKey\": \"<string>\",\n    \"sdkMaxTimeout\": \"<number>\",\n    \"sdkReferenceNumber\": \"<string>\",\n    \"sdkTransID\": \"<string>\"\n  },\n  \"language\": \"<string>\",\n  \"requestDcc\": \"<boolean>\",\n  \"dccData\": {\n    \"remoteIdentifier\": \"<string>\",\n    \"originalAmount\": \"<string>\",\n    \"originalCurrency\": \"<string>\",\n    \"convertedAmount\": \"<string>\",\n    \"convertedCurrency\": \"<string>\",\n    \"conversionRate\": \"<number>\",\n    \"selectedCurrency\": \"<string>\",\n    \"markUp\": \"<number>\"\n  },\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  },\n  \"cardData\": {\n    \"cardHolder\": \"<string>\",\n    \"pan\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expirationMonth\": \"<string>\",\n    \"expirationYear\": \"<string>\"\n  },\n  \"publicData\": {\n    \"value\": \"reference #/components/schemas/PublicData not found in the OpenAPI spec\"\n  },\n  \"referenceSchemeTransactionIdentifier\": \"<string>\",\n  \"includeTracing\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "43f01e23-40e6-4b46-b874-314dc4498d17",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "debit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0001\",\n  \"additionalId1\": \"x0001\",\n  \"additionalId2\": \"y0001\",\n  \"extraData\": {\n    \"someKey\": \"someValue\",\n    \"otherKey\": \"otherValue\"\n  },\n  \"merchantMetaData\": \"merchantRelevantData\",\n  \"cardDetailsUpdate\": \"cardDetailsUpdateData\",\n  \"surchargeAmount\": \"0.99\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\",\n  \"successUrl\": \"http://example.com/success\",\n  \"cancelUrl\": \"http://example.com/cancel\",\n  \"errorUrl\": \"http://example.com/error\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"transactionToken\": \"ix::tRaNsAcT1OnToK3N\",\n  \"description\": \"Example Product\",\n  \"customer\": {\n    \"identification\": \"c0001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\"\n  },\n  \"threeDSecureData\": {\n    \"3dsecure\": \"MANDATORY\"\n  },\n  \"referenceSchemeTransactionIdentifier\": \"IXHKDJRR462950\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c1791a9-edd6-42d9-85c6-dccc257e0089",
+          "name": "Process a preauthorize: reserves the payment amount on the customer's payment instrument",
+          "request": {
+            "name": "Process a preauthorize: reserves the payment amount on the customer's payment instrument",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "preauthorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"captureInMinutes\": \"<integer>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"cardDetailsUpdate\": {\n    \"expiryMonth\": \"<string>\",\n    \"expiryYear\": \"<string>\"\n  },\n  \"referenceUuid\": \"<string>\",\n  \"surchargeAmount\": \"<string>\",\n  \"paymentToken\": {\n    \"cryptogram\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenExpirationDay\": \"<string>\",\n    \"tokenExpirationMonth\": \"<string>\",\n    \"tokenExpirationYear\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deviceManufacturerIdentifier\": \"<string>\",\n    \"paymentAccountReference\": \"<string>\",\n    \"eciIndicator\": \"<string>\"\n  },\n  \"successUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"errorUrl\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"transactionToken\": \"<string>\",\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ],\n  \"splits\": [\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"withRegister\": \"<boolean>\",\n  \"transactionIndicator\": \"<string>\",\n  \"customer\": {\n    \"identification\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"birthDate\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingPostcode\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingPhone\": \"<string>\",\n    \"shippingFirstName\": \"<string>\",\n    \"shippingLastName\": \"<string>\",\n    \"shippingCompany\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingPostcode\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingPhone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"email\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"ipAddress\": \"<string>\",\n    \"nationalId\": \"<string>\",\n    \"extraData\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"paymentData\": {\n      \"ibanData\": {\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\",\n        \"mandateId\": \"<string>\",\n        \"mandateDate\": \"<string>\"\n      }\n    }\n  },\n  \"schedule\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"periodLength\": \"<integer>\",\n    \"periodUnit\": \"<string>\",\n    \"startDateTime\": \"<string>\",\n    \"merchantMetaData\": \"<string>\",\n    \"callbackUrl\": \"<string>\"\n  },\n  \"customerProfileData\": {\n    \"profileGuid\": \"<string>\",\n    \"customerIdentification\": \"<string>\",\n    \"markAsPreferred\": \"<boolean>\"\n  },\n  \"threeDSecureData\": {\n    \"3dsecure\": \"<string>\",\n    \"schemeId\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"authenticationIndicator\": \"<string>\",\n    \"cardholderAuthenticationMethod\": \"<string>\",\n    \"cardholderAuthenticationDateTime\": \"<string>\",\n    \"cardHolderAuthenticationData\": \"<string>\",\n    \"challengeIndicator\": \"<string>\",\n    \"priorReference\": \"<string>\",\n    \"priorAuthenticationMethod\": \"<string>\",\n    \"priorAuthenticationDateTime\": \"<string>\",\n    \"priorAuthenticationData\": \"<string>\",\n    \"cardholderAccountType\": \"<string>\",\n    \"cardholderAccountAgeIndicator\": \"<string>\",\n    \"cardholderAccountDate\": \"<string>\",\n    \"cardholderAccountChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastChange\": \"<string>\",\n    \"cardholderAccountPasswordChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastPasswordChange\": \"<string>\",\n    \"shippingAddressUsageIndicator\": \"<string>\",\n    \"shippingAddressFirstUsage\": \"<string>\",\n    \"transactionActivityDay\": \"<number>\",\n    \"transactionActivityYear\": \"<number>\",\n    \"addCardAttemptsDay\": \"<number>\",\n    \"purchaseCountSixMonths\": \"<number>\",\n    \"suspiciousAccountActivityIndicator\": \"<string>\",\n    \"shippingNameEqualIndicator\": \"<string>\",\n    \"paymentAccountAgeIndicator\": \"<string>\",\n    \"paymentAccountAgeDate\": \"<string>\",\n    \"billingAddressLine3\": \"<string>\",\n    \"shippingAddressLine3\": \"<string>\",\n    \"billingShippingAddressMatch\": \"<string>\",\n    \"homePhoneCountryPrefix\": \"<string>\",\n    \"homePhoneNumber\": \"<string>\",\n    \"mobilePhoneCountryPrefix\": \"<string>\",\n    \"mobilePhoneNumber\": \"<string>\",\n    \"workPhoneCountryPrefix\": \"<string>\",\n    \"workPhoneNumber\": \"<string>\",\n    \"purchaseInstalData\": \"<number>\",\n    \"shipIndicator\": \"<string>\",\n    \"deliveryTimeframe\": \"<string>\",\n    \"deliveryEmailAddress\": \"<string>\",\n    \"reorderItemsIndicator\": \"<string>\",\n    \"preOrderPurchaseIndicator\": \"<string>\",\n    \"preOrderDate\": \"<string>\",\n    \"giftCardAmount\": \"<number>\",\n    \"giftCardCurrency\": \"<string>\",\n    \"giftCardCount\": \"<number>\",\n    \"purchaseDate\": \"<string>\",\n    \"recurringExpiry\": \"<string>\",\n    \"recurringFrequency\": \"<number>\",\n    \"transType\": \"<string>\",\n    \"exemptionIndicator\": \"<string>\",\n    \"threeRIIndicator\": \"<string>\",\n    \"browserChallengeWindowSize\": \"<string>\",\n    \"browserAcceptHeader\": \"<string>\",\n    \"browserIpAddress\": \"<string>\",\n    \"browserJavaEnabled\": \"<boolean>\",\n    \"browserLanguage\": \"<string>\",\n    \"browserColorDepth\": \"<integer>\",\n    \"browserScreenHeight\": \"<number>\",\n    \"browserScreenWidth\": \"<number>\",\n    \"browserTimezone\": \"<integer>\",\n    \"browserUserAgent\": \"<string>\",\n    \"browserPlatform\": \"<string>\",\n    \"sdkInterface\": \"<string>\",\n    \"sdkUiType\": \"<string>\",\n    \"sdkAppID\": \"<string>\",\n    \"sdkEncData\": \"<string>\",\n    \"sdkEphemPubKey\": \"<string>\",\n    \"sdkMaxTimeout\": \"<number>\",\n    \"sdkReferenceNumber\": \"<string>\",\n    \"sdkTransID\": \"<string>\"\n  },\n  \"language\": \"<string>\",\n  \"requestDcc\": \"<boolean>\",\n  \"dccData\": {\n    \"remoteIdentifier\": \"<string>\",\n    \"originalAmount\": \"<string>\",\n    \"originalCurrency\": \"<string>\",\n    \"convertedAmount\": \"<string>\",\n    \"convertedCurrency\": \"<string>\",\n    \"conversionRate\": \"<number>\",\n    \"selectedCurrency\": \"<string>\",\n    \"markUp\": \"<number>\"\n  },\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  },\n  \"cardData\": {\n    \"cardHolder\": \"<string>\",\n    \"pan\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expirationMonth\": \"<string>\",\n    \"expirationYear\": \"<string>\"\n  },\n  \"publicData\": {\n    \"value\": \"reference #/components/schemas/PublicData not found in the OpenAPI spec\"\n  },\n  \"referenceSchemeTransactionIdentifier\": \"<string>\",\n  \"includeTracing\": \"<boolean>\",\n  \"requestPartialAuthorization\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0648916-3d6d-405e-85fe-178d25b78011",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "preauthorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0002\",\n  \"extraData\": {\n    \"someKey\": \"someValue\",\n    \"otherKey\": \"otherValue\"\n  },\n  \"merchantMetaData\": \"merchantRelevantData\",\n  \"cardDetailsUpdate\": \"cardDetailsUpdateData\",\n  \"surchargeAmount\": \"0.99\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\",\n  \"successUrl\": \"http://example.com/success\",\n  \"cancelUrl\": \"http://example.com/cancel\",\n  \"errorUrl\": \"http://example.com/error\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"description\": \"Example Product\",\n  \"customer\": {\n    \"identification\": \"c0001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\"\n  },\n  \"threeDSecureData\": {\n    \"3dsecure\": \"MANDATORY\"\n  },\n  \"referenceSchemeTransactionIdentifier\": \"IXHKDJRR462950\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52e56050-9bde-4fed-83c4-ff37e306fb69",
+          "name": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)",
+          "request": {
+            "name": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "incrementalAuthorization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"successUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"errorUrl\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"transactionIndicator\": \"<string>\",\n  \"language\": \"<string>\",\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  },\n  \"cardData\": {\n    \"cardHolder\": \"<string>\",\n    \"pan\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expirationMonth\": \"<string>\",\n    \"expirationYear\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fff379d0-5d3c-4adf-bd4a-addec9782d10",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "incrementalAuthorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0002\",\n  \"referenceUuid\": \"uuid_of_preauth\",\n  \"extraData\": {\n    \"someKey\": \"someValue\",\n    \"otherKey\": \"otherValue\"\n  },\n  \"merchantMetaData\": \"merchantRelevantData\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\",\n  \"successUrl\": \"http://example.com/success\",\n  \"cancelUrl\": \"http://example.com/cancel\",\n  \"errorUrl\": \"http://example.com/error\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"description\": \"Example Product\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebfffd41-5ec2-4766-a3a0-6bc7dab27c06",
+          "name": "Process a capture: completes a payment previously authorized through Preauthorize",
+          "request": {
+            "name": "Process a capture: completes a payment previously authorized through Preauthorize",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"paymentToken\": {\n    \"cryptogram\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenExpirationDay\": \"<string>\",\n    \"tokenExpirationMonth\": \"<string>\",\n    \"tokenExpirationYear\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deviceManufacturerIdentifier\": \"<string>\",\n    \"paymentAccountReference\": \"<string>\",\n    \"eciIndicator\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"splits\": [\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"isFinalCapture\": \"<boolean>\",\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e31175b-2921-4de1-8415-04180a5ab135",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0003\",\n  \"referenceUuid\": \"bcdef23456bcdef23456\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a35eb301-f262-42a4-9e30-dcefb21499ce",
+          "name": "Process a void: cancels a previously authorized Preauthorize",
+          "request": {
+            "name": "Process a void: cancels a previously authorized Preauthorize",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1da686d4-3099-42b9-914f-8b6b46b79e4d",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0004\",\n  \"referenceUuid\": \"bcdef23456bcdef23456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2c57af2-16d7-41c9-afdf-750a9df65407",
+          "name": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)",
+          "request": {
+            "name": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"successUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"errorUrl\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"paymentToken\": {\n    \"cryptogram\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenExpirationDay\": \"<string>\",\n    \"tokenExpirationMonth\": \"<string>\",\n    \"tokenExpirationYear\": \"<string>\",\n    \"type\": \"<string>\",\n    \"deviceManufacturerIdentifier\": \"<string>\",\n    \"paymentAccountReference\": \"<string>\",\n    \"eciIndicator\": \"<string>\"\n  },\n  \"transactionToken\": \"<string>\",\n  \"description\": \"<string>\",\n  \"transactionIndicator\": \"<string>\",\n  \"customer\": {\n    \"identification\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"birthDate\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingPostcode\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingPhone\": \"<string>\",\n    \"shippingFirstName\": \"<string>\",\n    \"shippingLastName\": \"<string>\",\n    \"shippingCompany\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingPostcode\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingPhone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"email\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"ipAddress\": \"<string>\",\n    \"nationalId\": \"<string>\",\n    \"extraData\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"paymentData\": {\n      \"ibanData\": {\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\",\n        \"mandateId\": \"<string>\",\n        \"mandateDate\": \"<string>\"\n      }\n    }\n  },\n  \"schedule\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"periodLength\": \"<integer>\",\n    \"periodUnit\": \"<string>\",\n    \"startDateTime\": \"<string>\",\n    \"merchantMetaData\": \"<string>\",\n    \"callbackUrl\": \"<string>\"\n  },\n  \"customerProfileData\": {\n    \"profileGuid\": \"<string>\",\n    \"customerIdentification\": \"<string>\",\n    \"markAsPreferred\": \"<boolean>\"\n  },\n  \"threeDSecureData\": {\n    \"3dsecure\": \"<string>\",\n    \"schemeId\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"authenticationIndicator\": \"<string>\",\n    \"cardholderAuthenticationMethod\": \"<string>\",\n    \"cardholderAuthenticationDateTime\": \"<string>\",\n    \"cardHolderAuthenticationData\": \"<string>\",\n    \"challengeIndicator\": \"<string>\",\n    \"priorReference\": \"<string>\",\n    \"priorAuthenticationMethod\": \"<string>\",\n    \"priorAuthenticationDateTime\": \"<string>\",\n    \"priorAuthenticationData\": \"<string>\",\n    \"cardholderAccountType\": \"<string>\",\n    \"cardholderAccountAgeIndicator\": \"<string>\",\n    \"cardholderAccountDate\": \"<string>\",\n    \"cardholderAccountChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastChange\": \"<string>\",\n    \"cardholderAccountPasswordChangeIndicator\": \"<string>\",\n    \"cardholderAccountLastPasswordChange\": \"<string>\",\n    \"shippingAddressUsageIndicator\": \"<string>\",\n    \"shippingAddressFirstUsage\": \"<string>\",\n    \"transactionActivityDay\": \"<number>\",\n    \"transactionActivityYear\": \"<number>\",\n    \"addCardAttemptsDay\": \"<number>\",\n    \"purchaseCountSixMonths\": \"<number>\",\n    \"suspiciousAccountActivityIndicator\": \"<string>\",\n    \"shippingNameEqualIndicator\": \"<string>\",\n    \"paymentAccountAgeIndicator\": \"<string>\",\n    \"paymentAccountAgeDate\": \"<string>\",\n    \"billingAddressLine3\": \"<string>\",\n    \"shippingAddressLine3\": \"<string>\",\n    \"billingShippingAddressMatch\": \"<string>\",\n    \"homePhoneCountryPrefix\": \"<string>\",\n    \"homePhoneNumber\": \"<string>\",\n    \"mobilePhoneCountryPrefix\": \"<string>\",\n    \"mobilePhoneNumber\": \"<string>\",\n    \"workPhoneCountryPrefix\": \"<string>\",\n    \"workPhoneNumber\": \"<string>\",\n    \"purchaseInstalData\": \"<number>\",\n    \"shipIndicator\": \"<string>\",\n    \"deliveryTimeframe\": \"<string>\",\n    \"deliveryEmailAddress\": \"<string>\",\n    \"reorderItemsIndicator\": \"<string>\",\n    \"preOrderPurchaseIndicator\": \"<string>\",\n    \"preOrderDate\": \"<string>\",\n    \"giftCardAmount\": \"<number>\",\n    \"giftCardCurrency\": \"<string>\",\n    \"giftCardCount\": \"<number>\",\n    \"purchaseDate\": \"<string>\",\n    \"recurringExpiry\": \"<string>\",\n    \"recurringFrequency\": \"<number>\",\n    \"transType\": \"<string>\",\n    \"exemptionIndicator\": \"<string>\",\n    \"threeRIIndicator\": \"<string>\",\n    \"browserChallengeWindowSize\": \"<string>\",\n    \"browserAcceptHeader\": \"<string>\",\n    \"browserIpAddress\": \"<string>\",\n    \"browserJavaEnabled\": \"<boolean>\",\n    \"browserLanguage\": \"<string>\",\n    \"browserColorDepth\": \"<integer>\",\n    \"browserScreenHeight\": \"<number>\",\n    \"browserScreenWidth\": \"<number>\",\n    \"browserTimezone\": \"<integer>\",\n    \"browserUserAgent\": \"<string>\",\n    \"browserPlatform\": \"<string>\",\n    \"sdkInterface\": \"<string>\",\n    \"sdkUiType\": \"<string>\",\n    \"sdkAppID\": \"<string>\",\n    \"sdkEncData\": \"<string>\",\n    \"sdkEphemPubKey\": \"<string>\",\n    \"sdkMaxTimeout\": \"<number>\",\n    \"sdkReferenceNumber\": \"<string>\",\n    \"sdkTransID\": \"<string>\"\n  },\n  \"language\": \"<string>\",\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  },\n  \"cardData\": {\n    \"cardHolder\": \"<string>\",\n    \"pan\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expirationMonth\": \"<string>\",\n    \"expirationYear\": \"<string>\"\n  },\n  \"publicData\": {\n    \"value\": \"reference #/components/schemas/PublicData not found in the OpenAPI spec\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16d0fb43-9b5e-4846-a1b4-67fec6055a0d",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0005\",\n  \"merchantMetaData\": \"merchantRelevantData\",\n  \"successUrl\": \"http://example.com/success\",\n  \"cancelUrl\": \"http://example.com/cancel\",\n  \"errorUrl\": \"http://example.com/error\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"customer\": {\n    \"identification\": 1234,\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"paymentData\": {\n      \"ibanData\": {\n        \"iban\": \"AT11111111111111111111\",\n        \"bic\": \"ABC\"\n      }\n    }\n  },\n  \"description\": \"This is a register\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec689402-21a4-49b1-8fea-ff9c757005a8",
+          "name": "Process a deregister: deletes a previously registered payment instrument",
+          "request": {
+            "name": "Process a deregister: deletes a previously registered payment instrument",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "deregister"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"tokenType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbcb22b0-7496-48d1-9272-fba18f60b1fc",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "deregister"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0006\",\n  \"merchantMetaData\": \"merchantRelevantData\",\n  \"referenceUuid\": \"bcdef23456bcdef23456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa71bf8b-7f72-4796-b6b2-190db1c21ee1",
+          "name": "Process a refund",
+          "request": {
+            "name": "Process a refund",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"transactionToken\": \"<string>\",\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ],\n  \"splits\": [\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc515dc5-4803-4e21-af0a-2359b22de3c9",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0007\",\n  \"referenceUuid\": \"bcdef23456bcdef23456\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"description\": \"Refund money\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19514bbe-ef39-49b1-a996-10c3af9d723d",
+          "name": "Process a payout",
+          "request": {
+            "name": "Process a payout",
+            "description": {},
+            "url": {
+              "path": [
+                "transaction",
+                ":apiKey",
+                "payout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiKey",
+                  "description": "(Required) API Key of Connector"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantTransactionId\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"additionalId1\": \"<string>\",\n  \"additionalId2\": \"<string>\",\n  \"extraData\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"pspPassthroughData\": {\n    \"key_0\": \"<string>\"\n  },\n  \"merchantMetaData\": \"<string>\",\n  \"referenceUuid\": \"<string>\",\n  \"successUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"errorUrl\": \"<string>\",\n  \"callbackUrl\": \"<string>\",\n  \"transactionToken\": \"<string>\",\n  \"description\": \"<string>\",\n  \"items\": [\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"l2l3Data\": {\n        \"type\": \"<string>\",\n        \"unit\": \"<string>\",\n        \"unitPrice\": \"<string>\",\n        \"discount\": \"<string>\",\n        \"discountRate\": \"<string>\",\n        \"shippingAmount\": \"<string>\",\n        \"taxAmount\": \"<string>\",\n        \"taxRate\": \"<string>\",\n        \"commodityCode\": \"<string>\",\n        \"taxDetails\": [\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"rate\": \"<string>\",\n            \"code\": \"<string>\",\n            \"taxId\": \"<string>\",\n            \"applied\": \"<string>\",\n            \"exemptionCode\": \"<string>\"\n          }\n        ]\n      },\n      \"extraData\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      }\n    }\n  ],\n  \"splits\": [\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"identification\": \"<string>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"sellerMerchantGuid\": \"<string>\",\n      \"sellerMerchantExternalId\": \"<string>\",\n      \"commissionFee\": {\n        \"amount\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"customer\": {\n    \"identification\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"birthDate\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"billingAddress1\": \"<string>\",\n    \"billingAddress2\": \"<string>\",\n    \"billingCity\": \"<string>\",\n    \"billingPostcode\": \"<string>\",\n    \"billingState\": \"<string>\",\n    \"billingCountry\": \"<string>\",\n    \"billingPhone\": \"<string>\",\n    \"shippingFirstName\": \"<string>\",\n    \"shippingLastName\": \"<string>\",\n    \"shippingCompany\": \"<string>\",\n    \"shippingAddress1\": \"<string>\",\n    \"shippingAddress2\": \"<string>\",\n    \"shippingCity\": \"<string>\",\n    \"shippingPostcode\": \"<string>\",\n    \"shippingState\": \"<string>\",\n    \"shippingCountry\": \"<string>\",\n    \"shippingPhone\": \"<string>\",\n    \"company\": \"<string>\",\n    \"email\": \"<string>\",\n    \"emailVerified\": \"<boolean>\",\n    \"ipAddress\": \"<string>\",\n    \"nationalId\": \"<string>\",\n    \"extraData\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"paymentData\": {\n      \"ibanData\": {\n        \"iban\": \"<string>\",\n        \"bic\": \"<string>\",\n        \"mandateId\": \"<string>\",\n        \"mandateDate\": \"<string>\"\n      }\n    }\n  },\n  \"language\": \"<string>\",\n  \"transactionIndicator\": \"<string>\",\n  \"l2l3Data\": {\n    \"taxAmount\": \"<string>\",\n    \"vatRegistrationNumber\": \"<string>\",\n    \"nationalTaxIncluded\": \"<string>\",\n    \"discountAmount\": \"<string>\",\n    \"commodityCode\": \"<string>\",\n    \"freightAmount\": \"<string>\",\n    \"freightTaxAmount\": \"<string>\",\n    \"dutyAmount\": \"<string>\",\n    \"taxDetails\": [\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"rate\": \"<string>\",\n        \"code\": \"<string>\",\n        \"taxId\": \"<string>\",\n        \"applied\": \"<string>\",\n        \"exemptionCode\": \"<string>\"\n      }\n    ]\n  },\n  \"cardData\": {\n    \"cardHolder\": \"<string>\",\n    \"pan\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expirationMonth\": \"<string>\",\n    \"expirationYear\": \"<string>\"\n  },\n  \"publicData\": {\n    \"value\": \"reference #/components/schemas/PublicData not found in the OpenAPI spec\"\n  },\n  \"includeTracing\": \"<boolean>\",\n  \"allowUnlinkedRefund\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a7513ef-4656-4dc5-a1a1-ba36a78e9792",
+              "name": "Transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    ":apiKey",
+                    "payout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiKey",
+                      "description": "(Required) API Key of Connector"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantTransactionId\": \"2019-09-02-0008\",\n  \"amount\": \"9.99\",\n  \"currency\": \"EUR\",\n  \"callbackUrl\": \"http://example.com/callback\",\n  \"transactionToken\": \"ix::a1A2B3b4c5C6D7d\",\n  \"description\": \"Payout\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"uuid\": \"abcde12345abcde12345\",\n  \"purchaseId\": \"20190927-abcde12345abcde12345\",\n  \"returnType\": \"FINISHED\",\n  \"paymentMethod\": \"Creditcard\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://secure.tillpayments.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "985384d0-6423-47d0-8eda-8d656d0ac7d5",
+    "name": "tillpayments.com Payment Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "tillpayments.com Payment Platform",
+      "type": "text/plain"
+    }
+  }
+}

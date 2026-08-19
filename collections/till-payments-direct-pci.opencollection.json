@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "tillpayments.com Payment Platform",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process a debit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/debit",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a debit"
+        },
+        {
+          "info": {
+            "name": "Process a preauthorize: reserves the payment amount on the customer's payment instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/preauthorize",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a preauthorize: reserves the payment amount on the customer's payment instrument"
+        },
+        {
+          "info": {
+            "name": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/incrementalAuthorization",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)"
+        },
+        {
+          "info": {
+            "name": "Process a capture: completes a payment previously authorized through Preauthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/capture",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a capture: completes a payment previously authorized through Preauthorize"
+        },
+        {
+          "info": {
+            "name": "Process a void: cancels a previously authorized Preauthorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/void",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a void: cancels a previously authorized Preauthorize"
+        },
+        {
+          "info": {
+            "name": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/register",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a register: registers a customer's payment instrument for future use (Debit or Preauthorize)"
+        },
+        {
+          "info": {
+            "name": "Process a deregister: deletes a previously registered payment instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/deregister",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a deregister: deletes a previously registered payment instrument"
+        },
+        {
+          "info": {
+            "name": "Process a refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/refund",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a refund"
+        },
+        {
+          "info": {
+            "name": "Process a payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.tillpayments.com/api/v3/transaction/:apiKey/payout",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "path",
+                "description": "API Key of Connector"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a payout"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
