@@ -42,6 +42,10 @@ apis:
   tags:
   - Payments
   - Gateway
+  - Transaction
+  tags_raw:
+  - Payments
+  - Gateway
   - Transactions
   properties:
   - type: OpenAPI
@@ -68,6 +72,10 @@ apis:
   tags:
   - Payments
   - PCI
+  - Transaction
+  tags_raw:
+  - Payments
+  - PCI
   - Transactions
   properties:
   - type: OpenAPI
@@ -86,6 +94,9 @@ apis:
     OpenAPI specification was published for this product at the time of review.
   humanURL: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
   tags:
+  - Payments
+  - Pay by Link
+  tags_raw:
   - Payments
   - Pay By Link
   properties:
