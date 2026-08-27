@@ -29,69 +29,12 @@ created: '2026-07-24'
 modified: '2026-07-24'
 specificationVersion: '0.23'
 apis:
-- aid: till-payments:till-payments-gateway
-  name: Till Payments Gateway API
-  description: >-
-    The Till Payments Gateway V3 API for processing card-present and
-    card-not-present transactions — debit, preauthorize, capture, void, refund,
-    payout, registration/tokenization, recurring schedules, transaction status,
-    3-D Secure/DCC flows, and dispute handling — with asynchronous callbacks via
-    a merchant-supplied callbackUrl.
-  humanURL: https://gateway.tillpayments.com/documentation/apiv3
-  baseURL: https://gateway.tillpayments.com/api/v3
-  tags:
-  - Payments
-  - Gateway
-  - Transaction
-  tags_raw:
-  - Payments
-  - Gateway
-  - Transactions
-  properties:
-  - type: OpenAPI
-    url: openapi/till-payments-gateway.yml
-  - type: Documentation
-    url: https://gateway.tillpayments.com/documentation/gateway
-  - type: APIReference
-    url: https://gateway.tillpayments.com/documentation/apiv3
-  - type: MCPServer
-    url: mcp/till-payments-mcp.yml
-  - type: ToolCrosswalk
-    url: mcp/till-payments-tool-crosswalk.yml
-  - type: Overlay
-    url: overlays/till-payments-gateway-overlay.yaml
-- aid: till-payments:till-payments-direct-pci
-  name: Till Payments Direct PCI-enabled API
-  description: >-
-    The Till Payments Direct PCI-enabled Payment Platform V3 API for merchants
-    that are PCI DSS certified to collect and transmit raw cardholder data.
-    Requests are sent over HTTPS (TLS 1.2+) with JSON bodies to the secure host
-    for direct transaction processing.
-  humanURL: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
-  baseURL: https://secure.tillpayments.com/api/v3
-  tags:
-  - Payments
-  - PCI
-  - Transaction
-  tags_raw:
-  - Payments
-  - PCI
-  - Transactions
-  properties:
-  - type: OpenAPI
-    url: openapi/till-payments-direct-pci.yml
-  - type: Documentation
-    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
-  - type: APIReference
-    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
-  - type: Overlay
-    url: overlays/till-payments-direct-pci-overlay.yaml
 - aid: till-payments:till-payments-pay-by-link
   name: Till Payments Pay By Link API
   description: >-
-    The Till Payments Pay By Link API for generating shareable hosted payment
-    links, documented on the Till developer documentation site. No downloadable
-    OpenAPI specification was published for this product at the time of review.
+    The Till Payments Pay By Link API for generating shareable hosted payment links, documented on the
+    Till developer documentation site. No downloadable OpenAPI specification was published for this product
+    at the time of review.
   humanURL: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
   tags:
   - Payments
@@ -105,11 +48,10 @@ apis:
 - aid: till-payments:till-payments-terminal-connect
   name: Till Payments Terminal Connect API
   description: >-
-    Terminal Connect is Till Payments' in-person integration surface for
-    connecting point-of-sale software to Till payment terminals, documented via
-    getting-started and integration guides on the Till developer documentation
-    site. No downloadable OpenAPI specification was published for this product at
-    the time of review.
+    Terminal Connect is Till Payments' in-person integration surface for connecting point-of-sale software
+    to Till payment terminals, documented via getting-started and integration guides on the Till developer
+    documentation site. No downloadable OpenAPI specification was published for this product at the time
+    of review.
   humanURL: https://docs.tillpayments.com/guides/terminal-connect/getting-started/
   tags:
   - Payments
@@ -118,7 +60,153 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.tillpayments.com/guides/terminal-connect/getting-started/
+- aid: till-payments:till-payments-continue-dcc-api
+  name: Till Payments Continue Dcc API
+  description: The continue-dcc API from Till Payments — 1 operation(s) for continue-dcc.
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - continue-dcc
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-continue-dcc-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-dispute-api
+  name: Till Payments Dispute API
+  description: The Dispute API from Till Payments — 4 operation(s) for dispute.
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - Dispute
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-dispute-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-options-api
+  name: Till Payments Options API
+  description: Retrieve a list of options
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - options
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-options-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-prepare-transaction-api
+  name: Till Payments Prepare Transaction API
+  description: Prepare Transactions
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - prepare-transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-prepare-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-schedule-api
+  name: Till Payments Schedule API
+  description: Set and manage transaction schedules
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - schedule
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-schedule-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-status-api
+  name: Till Payments Status API
+  description: Retrieve the status of transactions
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - status
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-status-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+- aid: till-payments:till-payments-transaction-api
+  name: Till Payments Transaction API
+  description: Process transactions
+  humanURL: https://gateway.tillpayments.com/documentation/apiv3
+  baseURL: https://gateway.tillpayments.com/api/v3
+  tags:
+  - transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/till-payments-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/gateway
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/apiv3
+  - type: ToolCrosswalk
+    url: mcp/till-payments-tool-crosswalk.yml
+  - type: Documentation
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
+  - type: APIReference
+    url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
 common:
+- type: MCPServer
+  url: mcp/till-payments-mcp.yml
+- type: Overlay
+  url: overlays/till-payments-gateway-overlay.yaml
+- type: Overlay
+  url: overlays/till-payments-direct-pci-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/till-payments-agentic-access.yml
 - type: DomainSecurity
