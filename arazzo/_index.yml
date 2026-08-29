@@ -1,6 +1,6 @@
-generated: '2026-07-24'
-method: derived
-source: openapi/till-payments-gateway.yml
+x-generated: '2026-07-24'
+x-method: derived
+x-source: openapi/till-payments-gateway.yml
 workflows:
   - file: till-payments-authorize-and-capture.yml
     workflowId: authorizeAndCapture
