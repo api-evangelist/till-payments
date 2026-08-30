@@ -1,0 +1,373 @@
+openapi: 3.2.0
+info:
+  title: Till Payments Gateway Dispute API
+  description: Till Payments Gateway
+  termsOfService: ''
+  contact:
+    email: ''
+  license:
+    name: MIT
+  version: 3.0.0
+servers:
+- url: https://gateway.tillpayments.com/api/v3
+security:
+- basicAuth: []
+tags:
+- name: Dispute
+paths:
+  /dispute/{apiKey}/metadata/{uuid}:
+    post:
+      tags:
+      - Dispute
+      summary: Fetch metadata
+      description: Fetch associated Dispute metadata from Provider
+      operationId: disputeMetadata
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        description: Fetch associated Dispute metadata from Provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisputeMetadataRequest'
+        required: false
+      responses:
+        '200':
+          description: Dispute metadata response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisputeMetadataResponse'
+              examples:
+                finished:
+                  value:
+                    success: true
+                    extraData:
+                      someKey: someValue
+                      otherKey:
+                        otherKey1: otherValue1
+                        otherKey2: otherValue2
+                    metaData:
+                      someKey: someValue
+                      otherKey:
+                        otherKey1: otherValue1
+                        otherKey2: otherValue2
+                validation error:
+                  value:
+                    success: false
+                    errorMessage: 'Validation Error: Message'
+                    errorCode: 9999
+                processing error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Metadata Request Failed
+                      errorCode: 1003
+                not found error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction with 'uuid' not found
+                      errorCode: 1002
+                wrong type error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction is not of Type 'Chargeback'
+                      errorCode: 1002
+  /dispute/{apiKey}/accept/{uuid}:
+    post:
+      tags:
+      - Dispute
+      summary: Accept
+      description: You accept the open Dispute. The "accept" statement will be send to Provider and will lead to a Chargeback.
+      operationId: accept
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        description: Information to accept Dispute
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisputeAcceptRequest'
+        required: false
+      responses:
+        '200':
+          description: Dispute response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisputeResponse'
+              examples:
+                finished:
+                  value:
+                    success: true
+                    extraData:
+                      someKey: someValue
+                      otherKey:
+                        otherKey1: otherValue1
+                        otherKey2: otherValue2
+                validation error:
+                  value:
+                    success: false
+                    errorMessage: 'Validation Error: Message'
+                    errorCode: 9999
+                processing error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Accept Evidence failed
+                      errorCode: 1003
+                not found error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction with 'uuid' not found
+                      errorCode: 1002
+                wrong type error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction is not of Type 'Chargeback'
+                      errorCode: 1002
+  /dispute/{apiKey}/upload-evidence/{uuid}:
+    post:
+      tags:
+      - Dispute
+      summary: Upload Evidence
+      description: Upload Dispute Evidence Document to Provider
+      operationId: uploadDisputeEvidence
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        description: Document which should be uploaded to Provider
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DisputeUploadEvidenceRequest'
+        required: true
+      responses:
+        '200':
+          description: Dispute response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisputeResponse'
+              examples:
+                finished:
+                  value:
+                    success: true
+                    extraData:
+                      someKey: someValue
+                      otherKey:
+                        otherKey1: otherValue1
+                        otherKey2: otherValue2
+                validation error:
+                  value:
+                    success: false
+                    errorMessage: 'Validation Error: Message'
+                    errorCode: 9999
+                processing error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Upload Evidence failed
+                      errorCode: 1003
+                not found error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction with 'uuid' not found
+                      errorCode: 1002
+                wrong type error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction is not of Type 'Chargeback'
+                      errorCode: 1002
+  /dispute/{apiKey}/submit-evidence/{uuid}:
+    post:
+      tags:
+      - Dispute
+      summary: Submit Evidence
+      description: Submit all previous uploaded Dispute Evidence to Provider
+      operationId: submitDisputeEvidence
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        description: Data which should be provided for the Dispute
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisputeSubmitEvidenceRequest'
+        required: false
+      responses:
+        '200':
+          description: Dispute response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisputeResponse'
+              examples:
+                finished:
+                  value:
+                    success: true
+                    extraData:
+                      someKey: someValue
+                      otherKey:
+                        otherKey1: otherValue1
+                        otherKey2: otherValue2
+                validation error:
+                  value:
+                    success: false
+                    errorMessage: 'Validation Error: Message'
+                    errorCode: 9999
+                processing error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Upload Evidence failed
+                      errorCode: 1003
+                not found error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction with 'uuid' not found
+                      errorCode: 1002
+                wrong type error:
+                  value:
+                    success: false
+                    returnType: ERROR
+                    errors:
+                    - errorMessage: Referenced Transaction is not of Type 'Chargeback'
+                      errorCode: 1002
+components:
+  schemas:
+    TransactionError:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+          format: int32
+        adapterMessage:
+          type: string
+        adapterCode:
+          type: string
+      additionalProperties: false
+    DisputeResponseExtraData:
+      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        someKey: someValue
+        otherKey:
+        - otherKey1: otherValue1
+          otherKey2: otherValue2
+    DisputeResponseMetadata:
+      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        someKey: someValue
+        otherKey:
+        - otherKey1: otherValue1
+          otherKey2: otherValue2
+    ExtraData:
+      type: object
+      additionalProperties:
+        type: string
+    TransactionErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionError'
+    DisputeMetadataRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+    DisputeMetadataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        extraData:
+          $ref: '#/components/schemas/DisputeResponseExtraData'
+        metaData:
+          $ref: '#/components/schemas/DisputeResponseMetadata'
+        errors:
+          $ref: '#/components/schemas/TransactionErrors'
+      additionalProperties: false
+    DisputeAcceptRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+    DisputeUploadEvidenceRequest:
+      type: object
+      required:
+      - file
+      properties:
+        file:
+          type: string
+          format: binary
+        extraData:
+          type: string
+          additionalProperties:
+            type: string
+    DisputeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        extraData:
+          $ref: '#/components/schemas/DisputeResponseExtraData'
+        errors:
+          $ref: '#/components/schemas/TransactionErrors'
+      additionalProperties: false
+    DisputeSubmitEvidenceRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+  parameters:
+    ApiKey:
+      name: apiKey
+      in: path
+      description: API key of connector.
+      required: true
+      schema:
+        type: string
+        maxLength: 50
+    Uuid:
+      name: uuid
+      in: path
+      description: Uuid of Dispute
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Till Payments Gateway Documentation
+  url: https://gateway.tillpayments.com/documentation/gateway

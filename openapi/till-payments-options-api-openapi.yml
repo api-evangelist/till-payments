@@ -1,0 +1,105 @@
+openapi: 3.2.0
+info:
+  title: Till Payments Gateway Options API
+  description: Till Payments Gateway
+  termsOfService: ''
+  contact:
+    email: ''
+  license:
+    name: MIT
+  version: 3.0.0
+servers:
+- url: https://gateway.tillpayments.com/api/v3
+security:
+- basicAuth: []
+tags:
+- name: options
+  description: Retrieve a list of options
+  externalDocs:
+    description: Find out more about the options API
+    url: https://gateway.tillpayments.com/documentation/apiv3#options-request
+paths:
+  /options/{apiKey}/{optionsName}:
+    post:
+      tags:
+      - options
+      summary: Retrieve an options list based on given option name
+      operationId: options
+      security: []
+      parameters:
+      - name: apiKey
+        in: path
+        description: API Key of Connector
+        required: true
+        schema:
+          type: string
+      - name: optionsName
+        in: path
+        description: Options identifier of the appropriate adapter
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Parameters may be required dependent on the adapter
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptionsRequest'
+            example:
+              parameters:
+                firstParam: firstValue
+                secondParam: secondValue
+        required: true
+      responses:
+        '200':
+          description: Options response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionsResponse'
+              examples:
+                success:
+                  value:
+                    success: true
+                    options:
+                      bank1: Bank One
+                      bank2: Bank Two
+                      bank3: Bank Three
+                      bank4: Bank Four
+                error:
+                  value:
+                    success: false
+                    errorMessage: Given identifier 'someIdentifier' is invalid.
+components:
+  schemas:
+    OptionsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+            additionalProperties: false
+        error:
+          type: string
+      additionalProperties: false
+    OptionsRequest:
+      type: object
+      properties:
+        parameters:
+          type: object
+      additionalProperties: false
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Till Payments Gateway Documentation
+  url: https://gateway.tillpayments.com/documentation/gateway

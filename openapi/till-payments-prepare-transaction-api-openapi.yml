@@ -1,0 +1,1015 @@
+openapi: 3.2.0
+info:
+  title: Till Payments Gateway Prepare Transaction API
+  description: Till Payments Gateway
+  termsOfService: ''
+  contact:
+    email: ''
+  license:
+    name: MIT
+  version: 3.0.0
+servers:
+- url: https://gateway.tillpayments.com/api/v3
+security:
+- basicAuth: []
+tags:
+- name: prepare-transaction
+  description: Prepare Transactions
+  externalDocs:
+    description: Find out more about the transaction API
+    url: https://gateway.tillpayments.com/documentation/apiv3
+paths:
+  /transaction/{apiKey}/prepare-debit:
+    post:
+      tags:
+      - prepare-transaction
+      summary: Process a prepare Debit
+      operationId: processPrepareDebit
+      parameters:
+      - name: apiKey
+        in: path
+        description: API Key of Connector
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Data which is required to process a Debit
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepareDebitRequest'
+      responses:
+        '200':
+          description: Prepare Debit response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepareDebitResponse'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      data1: data1
+                      data2: data2
+                error:
+                  value:
+                    success: false
+                    errorMessage: Given identifier 'someIdentifier' is invalid.
+  /transaction/{apiKey}/prepare-preauthorize:
+    post:
+      tags:
+      - prepare-transaction
+      summary: Process a prepare Preauthorize
+      operationId: processPreparePreauthorize
+      parameters:
+      - name: apiKey
+        in: path
+        description: API Key of Connector
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Data which is required to process a Preauthorize
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreparePreauthorizeRequest'
+      responses:
+        '200':
+          description: Preauthorize Debit response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreparePreauthorizeResponse'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      data1: data1
+                      data2: data2
+                error:
+                  value:
+                    success: false
+                    errorMessage: Given identifier 'someIdentifier' is invalid.
+  /transaction/{apiKey}/prepare-register:
+    post:
+      tags:
+      - prepare-transaction
+      summary: Process a prepare Register
+      operationId: processPrepareRegister
+      parameters:
+      - name: apiKey
+        in: path
+        description: API Key of Connector
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Data which is required to process a Register
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepareRegisterRequest'
+      responses:
+        '200':
+          description: Prepare Register response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepareRegisterResponse'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      data1: data1
+                      data2: data2
+                error:
+                  value:
+                    success: false
+                    errorMessage: Given identifier 'someIdentifier' is invalid.
+components:
+  schemas:
+    WalletData:
+      type: object
+      properties:
+        walletData:
+          type: object
+          properties:
+            walletReferenceId:
+              type: string
+              maxLength: 255
+            walletOwner:
+              type: string
+              maxLength: 255
+            walletType:
+              type: string
+              maxLength: 255
+          additionalProperties: false
+      additionalProperties: false
+    Customer:
+      type: object
+      properties:
+        identification:
+          type: string
+          maxLength: 36
+        firstName:
+          type: string
+          maxLength: 50
+        lastName:
+          type: string
+          maxLength: 50
+        birthDate:
+          $ref: '#/components/schemas/Date'
+        gender:
+          type: string
+          enum:
+          - M
+          - F
+        billingAddress1:
+          type: string
+          maxLength: 50
+        billingAddress2:
+          type: string
+          maxLength: 50
+        billingCity:
+          type: string
+          maxLength: 50
+        billingPostcode:
+          type: string
+          maxLength: 16
+        billingState:
+          type: string
+          maxLength: 30
+        billingCountry:
+          $ref: '#/components/schemas/Country'
+        billingPhone:
+          type: string
+          maxLength: 20
+        shippingFirstName:
+          type: string
+          maxLength: 50
+        shippingLastName:
+          type: string
+          maxLength: 50
+        shippingCompany:
+          type: string
+          maxLength: 50
+        shippingAddress1:
+          type: string
+          maxLength: 50
+        shippingAddress2:
+          type: string
+          maxLength: 50
+        shippingCity:
+          type: string
+          maxLength: 50
+        shippingPostcode:
+          type: string
+          maxLength: 16
+        shippingState:
+          type: string
+          maxLength: 30
+        shippingCountry:
+          $ref: '#/components/schemas/Country'
+        shippingPhone:
+          type: string
+          maxLength: 20
+        company:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          maxLength: 255
+        emailVerified:
+          type: boolean
+        ipAddress:
+          type: string
+          maxLength: 50
+        nationalId:
+          type: string
+          maxLength: 20
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        paymentData:
+          $ref: '#/components/schemas/PaymentData'
+      additionalProperties: false
+    Date:
+      type: string
+      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$
+    Items:
+      type: array
+      items:
+        type: object
+        properties:
+          identification:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+          quantity:
+            anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^\d+$
+          price:
+            anyOf:
+            - type: number
+            - type: string
+              pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
+          currency:
+            $ref: '#/components/schemas/Currency'
+          l2l3Data:
+            type: object
+            properties:
+              type:
+                type: string
+              unit:
+                type: string
+              unitPrice:
+                $ref: '#/components/schemas/Amount'
+              discount:
+                $ref: '#/components/schemas/Amount'
+              discountRate:
+                $ref: '#/components/schemas/Amount'
+              shippingAmount:
+                $ref: '#/components/schemas/Amount'
+              taxAmount:
+                $ref: '#/components/schemas/Amount'
+              taxRate:
+                $ref: '#/components/schemas/Amount'
+              commodityCode:
+                type: string
+              taxDetails:
+                $ref: '#/components/schemas/TaxDetails'
+            additionalProperties: false
+          extraData:
+            $ref: '#/components/schemas/ExtraData'
+        additionalProperties: false
+    PayByLink:
+      type: object
+      properties:
+        sendByEmail:
+          type: boolean
+        expirationInMinute:
+          type: integer
+          format: int32
+          minimum: 1
+      additionalProperties: false
+    PreparePreauthorizeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+      additionalProperties: true
+    PspPassthroughData:
+      type: object
+      additionalProperties:
+        type: string
+    L2L3Data:
+      type: object
+      properties:
+        taxAmount:
+          $ref: '#/components/schemas/Amount'
+        vatRegistrationNumber:
+          type: string
+          maxLength: 255
+        nationalTaxIncluded:
+          type: string
+        discountAmount:
+          $ref: '#/components/schemas/Amount'
+        commodityCode:
+          type: string
+          maxLength: 255
+        freightAmount:
+          $ref: '#/components/schemas/Amount'
+        freightTaxAmount:
+          $ref: '#/components/schemas/Amount'
+        dutyAmount:
+          $ref: '#/components/schemas/Amount'
+        taxDetails:
+          $ref: '#/components/schemas/TaxDetails'
+      additionalProperties: false
+    PrepareDebitRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        withRegister:
+          type: boolean
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+      additionalProperties: false
+    Schedule:
+      type: object
+      required:
+      - amount
+      - currency
+      - periodLength
+      - periodUnit
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        periodLength:
+          type: integer
+          minimum: 0
+        periodUnit:
+          type: string
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+        startDateTime:
+          $ref: '#/components/schemas/DateTimeZone'
+        merchantMetaData:
+          type: string
+        callbackUrl:
+          type: string
+      additionalProperties: false
+    PrepareRegisterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+      additionalProperties: true
+    Country:
+      type: string
+      pattern: ^[A-Z]{2}$
+    DateTimeZone:
+      type: string
+      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))T(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])\+[0-9]{2}\:[0-9]{2}$
+    IbanData:
+      type: object
+      properties:
+        ibanData:
+          type: object
+          properties:
+            iban:
+              type: string
+              maxLength: 34
+            bic:
+              type: string
+              maxLength: 11
+            mandateId:
+              type: string
+              maxLength: 50
+            mandateDate:
+              $ref: '#/components/schemas/Date'
+          additionalProperties: false
+      additionalProperties: false
+    Currency:
+      type: string
+      pattern: ^[A-Z]{3}$
+    PrepareDebitResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+      additionalProperties: true
+    PaymentData:
+      oneOf:
+      - $ref: '#/components/schemas/IbanData'
+      - $ref: '#/components/schemas/WalletData'
+    ExtraData:
+      type: object
+      additionalProperties:
+        type: string
+    DateTime:
+      type: string
+      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1])) (([0-1][0-9])|([2][0-3])):([0-5][0-9])$
+    Amount:
+      type: string
+      pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
+    CustomerProfileData:
+      type: object
+      properties:
+        profileGuid:
+          type: string
+        customerIdentification:
+          type: string
+          maxLength: 36
+        paymentToken:
+          type: string
+        markAsPreferred:
+          type: boolean
+      additionalProperties: false
+    PreparePreauthorizeRequest:
+      type: object
+      required:
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        withRegister:
+          type: boolean
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+      additionalProperties: false
+    TaxDetails:
+      type: array
+      items:
+        type: object
+        properties:
+          type:
+            type: string
+            maxLength: 255
+          amount:
+            $ref: '#/components/schemas/Amount'
+          rate:
+            $ref: '#/components/schemas/Amount'
+          code:
+            type: string
+            maxLength: 255
+          taxId:
+            type: string
+            maxLength: 255
+          applied:
+            type: string
+            maxLength: 255
+          exemptionCode:
+            type: string
+            maxLength: 255
+        additionalProperties: false
+    ThreeDSecureData:
+      type: object
+      properties:
+        3dsecure:
+          type: string
+          enum:
+          - 'OFF'
+          - OPTIONAL
+          - MANDATORY
+        schemeId:
+          type: string
+          enum:
+          - CB
+        channel:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+        authenticationIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+        cardholderAuthenticationMethod:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+        cardholderAuthenticationDateTime:
+          $ref: '#/components/schemas/DateTime'
+        cardHolderAuthenticationData:
+          type: string
+        challengeIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+          - 08
+          - 09
+        priorReference:
+          type: string
+        priorAuthenticationMethod:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+        priorAuthenticationDateTime:
+          $ref: '#/components/schemas/DateTime'
+        priorAuthenticationData:
+          type: string
+        cardholderAccountType:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+        cardholderAccountAgeIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+        cardholderAccountDate:
+          $ref: '#/components/schemas/Date'
+        cardholderAccountChangeIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+        cardholderAccountLastChange:
+          $ref: '#/components/schemas/Date'
+        cardholderAccountPasswordChangeIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+        cardholderAccountLastPasswordChange:
+          $ref: '#/components/schemas/Date'
+        shippingAddressUsageIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+        shippingAddressFirstUsage:
+          $ref: '#/components/schemas/Date'
+        transactionActivityDay:
+          type: number
+        transactionActivityYear:
+          type: number
+        addCardAttemptsDay:
+          type: number
+        purchaseCountSixMonths:
+          type: number
+        suspiciousAccountActivityIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+        shippingNameEqualIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+        paymentAccountAgeIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+        paymentAccountAgeDate:
+          $ref: '#/components/schemas/Date'
+        billingAddressLine3:
+          type: string
+        shippingAddressLine3:
+          type: string
+        billingShippingAddressMatch:
+          type: string
+          enum:
+          - Y
+          - N
+        homePhoneCountryPrefix:
+          type: string
+          minLength: 1
+          maxLength: 3
+        homePhoneNumber:
+          type: string
+          maxLength: 15
+        mobilePhoneCountryPrefix:
+          type: string
+          minLength: 1
+          maxLength: 3
+        mobilePhoneNumber:
+          type: string
+          maxLength: 15
+        workPhoneCountryPrefix:
+          type: string
+          minLength: 1
+          maxLength: 3
+        workPhoneNumber:
+          type: string
+          maxLength: 15
+        purchaseInstalData:
+          type: number
+          minimum: 1
+          maximum: 999
+        shipIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+        deliveryTimeframe:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+        deliveryEmailAddress:
+          type: string
+        reorderItemsIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+        preOrderPurchaseIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+        preOrderDate:
+          $ref: '#/components/schemas/Date'
+        giftCardAmount:
+          type: number
+        giftCardCurrency:
+          $ref: '#/components/schemas/Currency'
+        giftCardCount:
+          type: number
+          minimum: 1
+          maximum: 99
+        purchaseDate:
+          $ref: '#/components/schemas/DateTime'
+        recurringExpiry:
+          $ref: '#/components/schemas/Date'
+        recurringFrequency:
+          type: number
+          minimum: 0
+          maximum: 9999
+        transType:
+          type: string
+          enum:
+          - '01'
+          - '03'
+          - '10'
+          - '11'
+          - '28'
+        exemptionIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+        threeRIIndicator:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+          - 08
+          - 09
+          - '10'
+          - '11'
+          - '12'
+        browserChallengeWindowSize:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+        browserAcceptHeader:
+          type: string
+        browserIpAddress:
+          type: string
+        browserJavaEnabled:
+          type: boolean
+        browserLanguage:
+          type: string
+          minLength: 1
+          maxLength: 8
+        browserColorDepth:
+          anyOf:
+          - type: integer
+          - type: string
+            enum:
+            - '1'
+            - '4'
+            - '8'
+            - '15'
+            - '16'
+            - '24'
+            - '30'
+            - '32'
+            - '48'
+        browserScreenHeight:
+          anyOf:
+          - type: number
+          - type: string
+            pattern: ^\d+$
+        browserScreenWidth:
+          anyOf:
+          - type: number
+          - type: string
+            pattern: ^\d+$
+        browserTimezone:
+          anyOf:
+          - type: integer
+            minimum: -9999
+            maximum: 9999
+          - type: string
+            pattern: ^[\-\+]?\d{1,4}$
+        browserUserAgent:
+          type: string
+          maxLength: 2048
+        browserPlatform:
+          type: string
+          maxLength: 2048
+        sdkInterface:
+          type: string
+          enum:
+          - '01'
+          - '02'
+          - '03'
+        sdkUiType:
+          type: string
+          pattern: ^(0[1-5]( *, *0[0-5])*)?$
+        sdkAppID:
+          type: string
+        sdkEncData:
+          type: string
+        sdkEphemPubKey:
+          type: string
+        sdkMaxTimeout:
+          type: number
+          minimum: 5
+        sdkReferenceNumber:
+          type: string
+        sdkTransID:
+          type: string
+      additionalProperties: false
+    PrepareRegisterRequest:
+      type: object
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        payByLink:
+          $ref: '#/components/schemas/PayByLink'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+      additionalProperties: false
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Till Payments Gateway Documentation
+  url: https://gateway.tillpayments.com/documentation/gateway
