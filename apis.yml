@@ -50,7 +50,7 @@ apis:
   humanURL: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
   tags:
   - Payments
-  - Pay by Link
+  - Pay By Link
   tags_raw:
   - Payments
   - Pay By Link
@@ -118,6 +118,8 @@ apis:
   humanURL: https://gateway.tillpayments.com/documentation/apiv3
   baseURL: https://gateway.tillpayments.com/api/v3
   tags:
+  - Options
+  tags_raw:
   - options
   properties:
   - type: OpenAPI
@@ -158,6 +160,8 @@ apis:
   humanURL: https://gateway.tillpayments.com/documentation/apiv3
   baseURL: https://gateway.tillpayments.com/api/v3
   tags:
+  - Schedule
+  tags_raw:
   - schedule
   properties:
   - type: OpenAPI
@@ -178,6 +182,8 @@ apis:
   humanURL: https://gateway.tillpayments.com/documentation/apiv3
   baseURL: https://gateway.tillpayments.com/api/v3
   tags:
+  - Status
+  tags_raw:
   - status
   properties:
   - type: OpenAPI
@@ -198,6 +204,8 @@ apis:
   humanURL: https://gateway.tillpayments.com/documentation/apiv3
   baseURL: https://gateway.tillpayments.com/api/v3
   tags:
+  - Transaction
+  tags_raw:
   - transaction
   properties:
   - type: OpenAPI
@@ -213,6 +221,11 @@ apis:
   - type: APIReference
     url: https://gateway.tillpayments.com/documentation/json-direct-pci-enabled-api
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/nuvei/
+  name: Nuvei
+  x-relationship: acquired
+  x-evidence: "Till was acquired by Nuvei in 2024 and now operates as part of Nuvei's global platform while retaining its Australian home market and developer surface."
 - type: MCPServer
   url: mcp/till-payments-mcp.yml
 - type: Overlay
