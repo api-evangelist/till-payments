@@ -50,7 +50,7 @@ apis:
   humanURL: https://docs.tillpayments.com/openapi/pay-by-link/paybylink/overview/
   tags:
   - Payments
-  - Pay By Link
+  - Pay by Link
   tags_raw:
   - Payments
   - Pay By Link
