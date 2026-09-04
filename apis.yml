@@ -27,6 +27,20 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  - {url: 'https://tillpayments.com/', status: 308, note: 'declared website redirects to https://www.nuvei.com/offers/australia-and-new-zealand — a different registrable domain (tillpayments.com -> nuvei.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
+  generated: '2026-09-03'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Payments
@@ -226,8 +240,9 @@ common:
   name: Nuvei
   x-relationship: acquired
   x-evidence: "Till was acquired by Nuvei in 2024 and now operates as part of Nuvei's global platform while retaining its Australian home market and developer surface."
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/till-payments-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: Overlay
   url: overlays/till-payments-gateway-overlay.yaml
 - type: Overlay
