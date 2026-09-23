@@ -1,0 +1,37 @@
+{
+  "provider": "till-payments",
+  "sources": [
+    "_original/till-payments-gateway.yml"
+  ],
+  "outputs": [
+    "till-payments-dispute-api-openapi.yml",
+    "till-payments-continue-dcc-api-openapi.yml",
+    "till-payments-options-api-openapi.yml",
+    "till-payments-prepare-transaction-api-openapi.yml",
+    "till-payments-schedule-api-openapi.yml",
+    "till-payments-status-api-openapi.yml",
+    "till-payments-transaction-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "till-payments-gateway.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "till-payments-gateway.yml: declared missing tag: Dispute",
+    "till-payments-gateway.yml: declared missing tag: continue-dcc",
+    "till-payments-gateway.yml: declared missing tag: dispute",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/till-payments-direct-pci.yml: archived document superseded by a larger archived document",
+    "till-payments-continue-dcc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-dispute-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-options-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-prepare-transaction-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-schedule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "till-payments-transaction-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

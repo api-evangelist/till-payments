@@ -1,29 +1,28 @@
 openapi: 3.2.0
 info:
-  title: Till Payments Transaction API
-  version: 3.0.0
+  title: Till Payments Gateway Transaction API
+  description: Till Payments Gateway
+  termsOfService: ''
   contact:
     email: ''
   license:
     name: MIT
-  termsOfService: ''
-  description: 'Operations tagged transaction across 2 of this provider''s published API definitions: till-payments-direct-pci.yml, till-payments-gateway.yml. Each path carries the servers of the definition it was published in.'
+  version: 3.0.0
 servers:
-- url: https://secure.tillpayments.com/api/v3
 - url: https://gateway.tillpayments.com/api/v3
 security:
 - basicAuth: []
 tags:
-- name: transaction
+- name: Transaction
   description: Process transactions
   externalDocs:
     description: Find out more about the transaction API
-    url: https://tillpayments.com/documentation/apiv3
+    url: https://gateway.tillpayments.com/documentation/apiv3
 paths:
   /transaction/{apiKey}/debit:
     post:
       tags:
-      - transaction
+      - Transaction
       summary: Process a debit
       operationId: processDebit
       parameters:
@@ -47,7 +46,6 @@ paths:
                 someKey: someValue
                 otherKey: otherValue
               merchantMetaData: merchantRelevantData
-              cardDetailsUpdate: cardDetailsUpdateData
               surchargeAmount: '0.99'
               amount: '9.99'
               currency: EUR
@@ -111,13 +109,11 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/preauthorize:
     post:
       tags:
-      - transaction
-      summary: 'Process a preauthorize: reserves the payment amount on the customer''s payment instrument'
+      - Transaction
+      summary: 'Process a preauthorize: reserves the payment amount on the customer''s payment…'
       operationId: processPreauthorize
       parameters:
       - name: apiKey
@@ -138,7 +134,6 @@ paths:
                 someKey: someValue
                 otherKey: otherValue
               merchantMetaData: merchantRelevantData
-              cardDetailsUpdate: cardDetailsUpdateData
               surchargeAmount: '0.99'
               amount: '9.99'
               currency: EUR
@@ -201,13 +196,11 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/incrementalAuthorization:
     post:
       tags:
-      - transaction
-      summary: Increases or prolongs the authorization on a customer's payment instrument (made with Preauthorize before)
+      - Transaction
+      summary: Increases or prolongs the authorization on a customer's payment instrument…
       operationId: processIncrementalAuthorization
       parameters:
       - name: apiKey
@@ -283,13 +276,11 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/capture:
     post:
       tags:
-      - transaction
-      summary: 'Process a capture: completes a payment previously authorized through Preauthorize'
+      - Transaction
+      summary: 'Process a capture: completes a payment previously authorized through…'
       operationId: processCapture
       parameters:
       - name: apiKey
@@ -355,12 +346,10 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/void:
     post:
       tags:
-      - transaction
+      - Transaction
       summary: 'Process a void: cancels a previously authorized Preauthorize'
       operationId: processVoid
       parameters:
@@ -425,13 +414,11 @@ paths:
                     success: false
                     errorMessage: 'root: ''referenceUuid'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/register:
     post:
       tags:
-      - transaction
-      summary: 'Process a register: registers a customer''s payment instrument for future use (Debit or Preauthorize)'
+      - Transaction
+      summary: 'Process a register: registers a customer''s payment instrument for future use…'
       operationId: processRegister
       parameters:
       - name: apiKey
@@ -509,12 +496,10 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/deregister:
     post:
       tags:
-      - transaction
+      - Transaction
       summary: 'Process a deregister: deletes a previously registered payment instrument'
       operationId: processDeregister
       parameters:
@@ -571,12 +556,10 @@ paths:
                     success: false
                     errorMessage: 'root: ''referenceUuid'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/refund:
     post:
       tags:
-      - transaction
+      - Transaction
       summary: Process a refund
       operationId: processRefund
       parameters:
@@ -636,12 +619,10 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
   /transaction/{apiKey}/payout:
     post:
       tags:
-      - transaction
+      - Transaction
       summary: Process a payout
       operationId: processPayout
       parameters:
@@ -701,2361 +682,16 @@ paths:
                     success: false
                     errorMessage: 'root: ''amount'' is required'
                     errorCode: 1002
-    servers:
-    - url: https://secure.tillpayments.com/api/v3
 components:
   schemas:
-    Payout:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits'
-        customer:
-          $ref: '#/components/schemas/Customer'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        cardData:
-          $ref: '#/components/schemas/CardData'
-        publicData:
-          $ref: '#/components/schemas/PublicData'
-        includeTracing:
-          type: boolean
-        allowUnlinkedRefund:
-          type: boolean
-          description: 'When true, processes this payout as an unlinked (unreferenced) refund instead of a standard payout. No reference to an original transaction is required. Available on: Axepta, CheckoutCom, StripeExtended, WorldLine.
-
-            '
-      additionalProperties: false
-    Register:
-      type: object
-      required:
-      - merchantTransactionId
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-          description: UUID of a previous register transaction on the same merchant. Used by the expiry-update register flow to point at the existing token whose expiry date should be patched.
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        paymentToken:
-          oneOf:
-          - $ref: '#/components/schemas/ExternallyProvisionedApplePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedNetworkToken'
-          discriminator:
-            propertyName: type
-            mapping:
-              EXTERNAL-APPLEPAY: '#/components/schemas/ExternallyProvisionedApplePayToken'
-              EXTERNAL-GOOGLEPAY: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-              EXTERNAL-NETWORK: '#/components/schemas/ExternallyProvisionedNetworkToken'
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        cardData:
-          $ref: '#/components/schemas/CardData'
-        publicData:
-          $ref: '#/components/schemas/PublicData'
-      additionalProperties: false
-    DccData:
-      type: object
-      properties:
-        remoteIdentifier:
-          type: string
-        originalAmount:
-          $ref: '#/components/schemas/Amount'
-        originalCurrency:
-          $ref: '#/components/schemas/Currency'
-        convertedAmount:
-          $ref: '#/components/schemas/Amount'
-        convertedCurrency:
-          $ref: '#/components/schemas/Currency'
-        conversionRate:
-          type: number
-        selectedCurrency:
-          type: string
-        markUp:
-          type: number
-    WalletData:
-      type: object
-      properties:
-        walletData:
-          type: object
-          properties:
-            walletReferenceId:
-              type: string
-              maxLength: 255
-            walletOwner:
-              type: string
-              maxLength: 255
-            walletType:
-              type: string
-              maxLength: 255
-          additionalProperties: false
-      additionalProperties: false
-    ExternallyProvisionedNetworkToken:
-      allOf:
-      - $ref: '#/components/schemas/BaseExternallyProvisionedToken'
-      type: object
-      properties:
-        cardHolder:
-          type: string
-        panUniqueReference:
-          type: string
-        tokenUniqueReference:
-          type: string
-        panLastFourDigits:
-          type: string
-          maxLength: 4
-        tokenRequestorId:
-          type: string
-    Customer:
-      type: object
-      properties:
-        identification:
-          type: string
-          maxLength: 36
-        firstName:
-          type: string
-          maxLength: 50
-        lastName:
-          type: string
-          maxLength: 50
-        birthDate:
-          $ref: '#/components/schemas/Date'
-        gender:
-          type: string
-          enum:
-          - M
-          - F
-        billingAddress1:
-          type: string
-          maxLength: 50
-        billingAddress2:
-          type: string
-          maxLength: 50
-        billingCity:
-          type: string
-          maxLength: 50
-        billingPostcode:
-          type: string
-          maxLength: 16
-        billingState:
-          type: string
-          maxLength: 30
-        billingCountry:
-          $ref: '#/components/schemas/Country'
-        billingPhone:
-          type: string
-          maxLength: 20
-        shippingFirstName:
-          type: string
-          maxLength: 50
-        shippingLastName:
-          type: string
-          maxLength: 50
-        shippingCompany:
-          type: string
-          maxLength: 50
-        shippingAddress1:
-          type: string
-          maxLength: 50
-        shippingAddress2:
-          type: string
-          maxLength: 50
-        shippingCity:
-          type: string
-          maxLength: 50
-        shippingPostcode:
-          type: string
-          maxLength: 16
-        shippingState:
-          type: string
-          maxLength: 30
-        shippingCountry:
-          $ref: '#/components/schemas/Country'
-        shippingPhone:
-          type: string
-          maxLength: 20
-        company:
-          type: string
-          maxLength: 50
-        email:
-          type: string
-          maxLength: 255
-        emailVerified:
-          type: boolean
-        ipAddress:
-          type: string
-          maxLength: 50
-        nationalId:
-          type: string
-          maxLength: 20
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        paymentData:
-          $ref: '#/components/schemas/PaymentData'
-      additionalProperties: false
-    Date:
-      type: string
-      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$
-    CardDetailsUpdateData:
-      type: object
-      properties:
-        expiryMonth:
-          type: string
-          pattern: ^((0[1-9])|(1[0-2]))$
-        expiryYear:
-          type: string
-          pattern: ^[0-9]{4}$
-    BaseExternallyProvisionedToken:
-      type: object
-      required:
-      - type
-      - token
-      - tokenExpirationMonth
-      - tokenExpirationYear
-      properties:
-        type:
-          type: string
-          enum:
-          - EXTERNAL-NETWORK
-          - EXTERNAL-GOOGLEPAY
-          - EXTERNAL-APPLEPAY
-        token:
-          type: string
-        cryptogram:
-          type: string
-        paymentAccountReference:
-          type: string
-          maxLength: 29
-          pattern: ^[A-Za-z0-9]+$
-        tokenExpirationMonth:
-          type: string
-          pattern: ^(0[1-9]|1[0-2])$
-          example: '07'
-        tokenExpirationYear:
-          type: string
-          pattern: ^[0-9]{4}$
-          example: '2025'
-        eciIndicator:
-          type: string
-          pattern: ^[0-9]{2}$
-          example: '05'
-    Items:
-      type: array
-      items:
-        type: object
-        properties:
-          identification:
-            type: string
-          name:
-            type: string
-          description:
-            type: string
-          quantity:
-            anyOf:
-            - type: integer
-              minimum: 1
-            - type: string
-              pattern: ^\d+$
-          price:
-            anyOf:
-            - type: number
-            - type: string
-              pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
-          currency:
-            $ref: '#/components/schemas/Currency'
-          l2l3Data:
-            type: object
-            properties:
-              type:
-                type: string
-              unit:
-                type: string
-              unitPrice:
-                $ref: '#/components/schemas/Amount'
-              discount:
-                $ref: '#/components/schemas/Amount'
-              discountRate:
-                $ref: '#/components/schemas/Amount'
-              shippingAmount:
-                $ref: '#/components/schemas/Amount'
-              taxAmount:
-                $ref: '#/components/schemas/Amount'
-              taxRate:
-                $ref: '#/components/schemas/Amount'
-              commodityCode:
-                type: string
-              taxDetails:
-                $ref: '#/components/schemas/TaxDetails'
-            additionalProperties: false
-          extraData:
-            $ref: '#/components/schemas/ExtraData'
-        additionalProperties: false
-    PspPassthroughData:
-      type: object
-      additionalProperties:
-        type: string
-    L2L3Data:
-      type: object
-      properties:
-        taxAmount:
-          $ref: '#/components/schemas/Amount'
-        vatRegistrationNumber:
-          type: string
-          maxLength: 255
-        nationalTaxIncluded:
-          type: string
-        discountAmount:
-          $ref: '#/components/schemas/Amount'
-        commodityCode:
-          type: string
-          maxLength: 255
-        freightAmount:
-          $ref: '#/components/schemas/Amount'
-        freightTaxAmount:
-          $ref: '#/components/schemas/Amount'
-        dutyAmount:
-          $ref: '#/components/schemas/Amount'
-        taxDetails:
-          $ref: '#/components/schemas/TaxDetails'
-      additionalProperties: false
-    Schedule:
-      type: object
-      required:
-      - amount
-      - currency
-      - periodLength
-      - periodUnit
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        periodLength:
-          type: integer
-          minimum: 0
-        periodUnit:
-          type: string
-          enum:
-          - DAY
-          - WEEK
-          - MONTH
-          - YEAR
-        startDateTime:
-          $ref: '#/components/schemas/DateTimeZone'
-        merchantMetaData:
-          type: string
-        callbackUrl:
-          type: string
-      additionalProperties: false
-    Deregister:
-      type: object
-      required:
-      - merchantTransactionId
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        tokenType:
-          type: string
-          enum:
-          - ALL
-          - PAN
-          - NT
-      additionalProperties: false
-    Country:
-      type: string
-      pattern: ^[A-Z]{2}$
-    ReturnIbanData:
-      type: object
-      properties:
-        _TYPE:
-          type: string
-          enum:
-          - ibanData
-        accountOwner:
-          type: string
-        iban:
-          type: string
-        bic:
-          type: string
-        mandateId:
-          type: string
-        mandateDate:
-          $ref: '#/components/schemas/Date'
-        bankName:
-          type: string
-        bankBranchName:
-          type: string
-        country:
-          $ref: '#/components/schemas/Country'
-      additionalProperties: false
-    Splits:
-      type: array
-      items:
-        type: object
-        properties:
-          identification:
-            type: string
-          amount:
-            type: number
-          currency:
-            $ref: '#/components/schemas/Currency'
-          sellerMerchantGuid:
-            type: string
-          sellerMerchantExternalId:
-            type: string
-          commissionFee:
-            type: object
-            properties:
-              amount:
-                type: number
-              currency:
-                $ref: '#/components/schemas/Currency'
-        additionalProperties: false
-    Preauthorize:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        captureInMinutes:
-          type: integer
-          minimum: 1
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        cardDetailsUpdate:
-          $ref: '#/components/schemas/CardDetailsUpdateData'
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        surchargeAmount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        paymentToken:
-          oneOf:
-          - $ref: '#/components/schemas/ExternallyProvisionedApplePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedNetworkToken'
-          discriminator:
-            propertyName: type
-            mapping:
-              EXTERNAL-APPLEPAY: '#/components/schemas/ExternallyProvisionedApplePayToken'
-              EXTERNAL-GOOGLEPAY: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-              EXTERNAL-NETWORK: '#/components/schemas/ExternallyProvisionedNetworkToken'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits'
-        withRegister:
-          type: boolean
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        requestDcc:
-          type: boolean
-        dccData:
-          $ref: '#/components/schemas/DccData'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        cardData:
-          $ref: '#/components/schemas/CardData'
-        publicData:
-          $ref: '#/components/schemas/PublicData'
-        referenceSchemeTransactionIdentifier:
-          type: string
-          maxLength: 50
-        includeTracing:
-          type: boolean
-        requestPartialAuthorization:
-          type: boolean
-          description: 'Request a partial authorization when the full amount cannot be authorized. The actual authorized amount may be less than the requested amount. Available on: CheckoutCom, StripeExtended, WorldLine
-
-            '
-      additionalProperties: false
-    IbanData:
-      type: object
-      properties:
-        ibanData:
-          type: object
-          properties:
-            iban:
-              type: string
-              maxLength: 34
-            bic:
-              type: string
-              maxLength: 11
-            mandateId:
-              type: string
-              maxLength: 50
-            mandateDate:
-              $ref: '#/components/schemas/Date'
-          additionalProperties: false
-      additionalProperties: false
-    DateTimeZone:
-      type: string
-      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))T(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])\+[0-9]{2}\:[0-9]{2}$
-    ReturnPhoneData:
-      type: object
-      properties:
-        _TYPE:
-          type: string
-          enum:
-          - phoneData
-        phoneNumber:
-          type: string
-        country:
-          $ref: '#/components/schemas/Country'
-        operator:
-          type: string
-      additionalProperties: false
-    Currency:
-      type: string
-      pattern: ^[A-Z]{3}$
-    ReturnWalletData:
-      type: object
-      properties:
-        _TYPE:
-          type: string
-          enum:
-          - walletData
-        walletReferenceId:
-          type: string
-        walletOwner:
-          type: string
-        walletType:
-          type: string
-      additionalProperties: false
-    ReturnData:
-      oneOf:
-      - $ref: '#/components/schemas/ReturnCardData'
-      - $ref: '#/components/schemas/ReturnPhoneData'
-      - $ref: '#/components/schemas/ReturnIbanData'
-      - $ref: '#/components/schemas/ReturnWalletData'
-      discriminator:
-        propertyName: _TYPE
-        mapping:
-          cardData: '#/components/schemas/ReturnCardData'
-          phoneData: '#/components/schemas/ReturnPhoneData'
-          ibanData: '#/components/schemas/ReturnIbanData'
-          walletData: '#/components/schemas/ReturnWalletData'
-    ExternallyProvisionedApplePayToken:
-      allOf:
-      - $ref: '#/components/schemas/BaseExternallyProvisionedToken'
-      type: object
-      required:
-      - cryptogram
-      - tokenExpirationDay
-      properties:
-        tokenExpirationDay:
-          type: string
-          pattern: ^(0[1-9]|[12][0-9]|3[01])$
-          example: '01'
-        deviceManufacturerIdentifier:
-          type: string
     PaymentData:
       oneOf:
       - $ref: '#/components/schemas/IbanData'
       - $ref: '#/components/schemas/WalletData'
-    TransactionResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        uuid:
-          type: string
-        purchaseId:
-          type: string
-        returnType:
-          type: string
-          enum:
-          - FINISHED
-          - REDIRECT
-          - HTML
-          - PENDING
-          - ERROR
-          - PENDING_DCC
-        redirectType:
-          type: string
-          enum:
-          - iframe
-          - fullpage
-          - 3ds
-        redirectUrl:
-          type: string
-          maxLength: 255
-        redirectQRCode:
-          type: string
-          description: DataUrl
-        htmlContent:
-          type: string
-        paymentDescriptor:
-          type: string
-        paymentMethod:
-          type: string
-        returnData:
-          $ref: '#/components/schemas/ReturnData'
-        scheduleData:
-          $ref: '#/components/schemas/ScheduleData'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData'
-        riskCheckData:
-          type: object
-          properties:
-            riskCheckResult:
-              type: string
-              enum:
-              - APPROVED
-              - DECLINED
-              - REVIEW
-            riskScore:
-              type: number
-            threeDSecureRequired:
-              type: boolean
-          additionalProperties: false
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              errorMessage:
-                type: string
-              errorCode:
-                type: integer
-                format: int32
-              adapterMessage:
-                type: string
-              adapterCode:
-                type: string
-            additionalProperties: false
-        adapterMessage:
-          type: string
-        adapterCode:
-          type: string
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        dccData:
-          type: object
-          properties:
-            uuid:
-              type: string
-            originalAmount:
-              $ref: '#/components/schemas/Amount'
-            originalCurrency:
-              $ref: '#/components/schemas/Currency'
-            convertedAmount:
-              $ref: '#/components/schemas/Amount'
-            convertedCurrency:
-              $ref: '#/components/schemas/Currency'
-            conversionRate:
-              type: number
-            disclaimer:
-              type: string
-      additionalProperties: false
-    Void:
-      type: object
-      required:
-      - merchantTransactionId
-      - referenceUuid
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        description:
-          type: string
-          maxLength: 255
-      additionalProperties: false
-    ExtraData:
-      type: object
-      additionalProperties:
-        type: string
-    ScheduleStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - PAUSED
-      - CANCELLED
-      - ERROR
-      - CREATE-PENDING
     DateTime:
       type: string
       pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1])) (([0-1][0-9])|([2][0-3])):([0-5][0-9])$
-    ExternallyProvisionedGooglePayToken:
-      allOf:
-      - $ref: '#/components/schemas/BaseExternallyProvisionedToken'
-      type: object
-    Amount:
-      type: string
-      pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
-    Refund:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      - referenceUuid
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        callbackUrl:
-          type: string
-          maxLength: 4096
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-      additionalProperties: false
-    CustomerProfileData:
-      type: object
-      properties:
-        profileGuid:
-          type: string
-        customerIdentification:
-          type: string
-          maxLength: 36
-        markAsPreferred:
-          type: boolean
-      additionalProperties: false
-    IncrementalAuthorization:
-      type: object
-      required:
-      - merchantTransactionId
-      - referenceUuid
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        cardData:
-          $ref: '#/components/schemas/CardData'
-      additionalProperties: false
-    Debit:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        cardDetailsUpdate:
-          $ref: '#/components/schemas/CardDetailsUpdateData'
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        surchargeAmount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        paymentToken:
-          oneOf:
-          - $ref: '#/components/schemas/ExternallyProvisionedApplePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedNetworkToken'
-          discriminator:
-            propertyName: type
-            mapping:
-              EXTERNAL-APPLEPAY: '#/components/schemas/ExternallyProvisionedApplePayToken'
-              EXTERNAL-GOOGLEPAY: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-              EXTERNAL-NETWORK: '#/components/schemas/ExternallyProvisionedNetworkToken'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits'
-        withRegister:
-          type: boolean
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        requestDcc:
-          type: boolean
-        dccData:
-          $ref: '#/components/schemas/DccData'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        cardData:
-          $ref: '#/components/schemas/CardData'
-        publicData:
-          $ref: '#/components/schemas/PublicData'
-        referenceSchemeTransactionIdentifier:
-          type: string
-          maxLength: 50
-        includeTracing:
-          type: boolean
-      additionalProperties: false
-    TaxDetails:
-      type: array
-      items:
-        type: object
-        properties:
-          type:
-            type: string
-            maxLength: 255
-          amount:
-            $ref: '#/components/schemas/Amount'
-          rate:
-            $ref: '#/components/schemas/Amount'
-          code:
-            type: string
-            maxLength: 255
-          taxId:
-            type: string
-            maxLength: 255
-          applied:
-            type: string
-            maxLength: 255
-          exemptionCode:
-            type: string
-            maxLength: 255
-        additionalProperties: false
-    ScheduleData:
-      type: object
-      properties:
-        scheduleId:
-          type: string
-        scheduleStatus:
-          $ref: '#/components/schemas/ScheduleStatus'
-        scheduledAt:
-          $ref: '#/components/schemas/DateTimeZone'
-        merchantMetaData:
-          type: string
-      additionalProperties: false
-    ReturnCardData:
-      type: object
-      properties:
-        _TYPE:
-          type: string
-          enum:
-          - cardData
-        type:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        country:
-          $ref: '#/components/schemas/Country'
-        cardHolder:
-          type: string
-        expiryMonth:
-          type: string
-          pattern: ^((0[1-9])|(1[0-2]))$
-        expiryYear:
-          type: string
-          pattern: ^[0-9]{4}$
-        binDigits:
-          type: string
-          pattern: ^[0-9]{6-8}$
-        firstSixDigits:
-          type: string
-          pattern: ^[0-9]{6}$
-        lastFourDigits:
-          type: string
-          pattern: ^[0-9]{4}$
-        fingerprint:
-          type: string
-        binBrand:
-          type: string
-        binBank:
-          type: string
-        binType:
-          type: string
-        binLevel:
-          type: string
-        binCountry:
-          type: string
-        threeDSecure:
-          type: string
-        eci:
-          type: string
-        merchantAdviceCode:
-          type: string
-        parsedMerchantAdviceCode:
-          type: string
-        schemeTransactionIdentifier:
-          type: string
-    CardData:
-      type: object
-      properties:
-        cardHolder:
-          type: string
-        pan:
-          type: string
-          pattern: ^[0-9]+$
-        cvv:
-          type: string
-          pattern: ^[0-9]{3-4}$
-        expirationMonth:
-          type: string
-          pattern: ^((0[1-9])|(1[0-2]))$
-        expirationYear:
-          type: string
-          pattern: ^[0-9]{4}$
-    Capture:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      - referenceUuid
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        paymentToken:
-          oneOf:
-          - $ref: '#/components/schemas/ExternallyProvisionedApplePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-          - $ref: '#/components/schemas/ExternallyProvisionedNetworkToken'
-          discriminator:
-            propertyName: type
-            mapping:
-              EXTERNAL-APPLEPAY: '#/components/schemas/ExternallyProvisionedApplePayToken'
-              EXTERNAL-GOOGLEPAY: '#/components/schemas/ExternallyProvisionedGooglePayToken'
-              EXTERNAL-NETWORK: '#/components/schemas/ExternallyProvisionedNetworkToken'
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits'
-        isFinalCapture:
-          type: boolean
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-      additionalProperties: false
     ThreeDSecureData:
-      type: object
-      properties:
-        3dsecure:
-          type: string
-          enum:
-          - 'OFF'
-          - OPTIONAL
-          - MANDATORY
-        schemeId:
-          type: string
-          enum:
-          - CB
-        channel:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-        authenticationIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-        cardholderAuthenticationMethod:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-        cardholderAuthenticationDateTime:
-          $ref: '#/components/schemas/DateTime'
-        cardHolderAuthenticationData:
-          type: string
-        challengeIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-          - 08
-          - 09
-        priorReference:
-          type: string
-        priorAuthenticationMethod:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-        priorAuthenticationDateTime:
-          $ref: '#/components/schemas/DateTime'
-        priorAuthenticationData:
-          type: string
-        cardholderAccountType:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-        cardholderAccountAgeIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-        cardholderAccountDate:
-          $ref: '#/components/schemas/Date'
-        cardholderAccountChangeIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-        cardholderAccountLastChange:
-          $ref: '#/components/schemas/Date'
-        cardholderAccountPasswordChangeIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-        cardholderAccountLastPasswordChange:
-          $ref: '#/components/schemas/Date'
-        shippingAddressUsageIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-        shippingAddressFirstUsage:
-          $ref: '#/components/schemas/Date'
-        transactionActivityDay:
-          type: number
-        transactionActivityYear:
-          type: number
-        addCardAttemptsDay:
-          type: number
-        purchaseCountSixMonths:
-          type: number
-        suspiciousAccountActivityIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-        shippingNameEqualIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-        paymentAccountAgeIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-        paymentAccountAgeDate:
-          $ref: '#/components/schemas/Date'
-        billingAddressLine3:
-          type: string
-        shippingAddressLine3:
-          type: string
-        billingShippingAddressMatch:
-          type: string
-          enum:
-          - Y
-          - N
-        homePhoneCountryPrefix:
-          type: string
-          minLength: 1
-          maxLength: 3
-        homePhoneNumber:
-          type: string
-          maxLength: 15
-        mobilePhoneCountryPrefix:
-          type: string
-          minLength: 1
-          maxLength: 3
-        mobilePhoneNumber:
-          type: string
-          maxLength: 15
-        workPhoneCountryPrefix:
-          type: string
-          minLength: 1
-          maxLength: 3
-        workPhoneNumber:
-          type: string
-          maxLength: 15
-        purchaseInstalData:
-          type: number
-          minimum: 1
-          maximum: 999
-        shipIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-        deliveryTimeframe:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-        deliveryEmailAddress:
-          type: string
-        reorderItemsIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-        preOrderPurchaseIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-        preOrderDate:
-          $ref: '#/components/schemas/Date'
-        giftCardAmount:
-          type: number
-        giftCardCurrency:
-          $ref: '#/components/schemas/Currency'
-        giftCardCount:
-          type: number
-          minimum: 1
-          maximum: 99
-        purchaseDate:
-          $ref: '#/components/schemas/DateTime'
-        recurringExpiry:
-          $ref: '#/components/schemas/Date'
-        recurringFrequency:
-          type: number
-          minimum: 0
-          maximum: 9999
-        transType:
-          type: string
-          enum:
-          - '01'
-          - '03'
-          - '10'
-          - '11'
-          - '28'
-        exemptionIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-        threeRIIndicator:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-          - 08
-          - 09
-          - '10'
-          - '11'
-          - '12'
-        browserChallengeWindowSize:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-        browserAcceptHeader:
-          type: string
-        browserIpAddress:
-          type: string
-        browserJavaEnabled:
-          type: boolean
-        browserLanguage:
-          type: string
-          minLength: 1
-          maxLength: 8
-        browserColorDepth:
-          anyOf:
-          - type: integer
-          - type: string
-            enum:
-            - '1'
-            - '4'
-            - '8'
-            - '15'
-            - '16'
-            - '24'
-            - '30'
-            - '32'
-            - '48'
-        browserScreenHeight:
-          anyOf:
-          - type: number
-          - type: string
-            pattern: ^\d+$
-        browserScreenWidth:
-          anyOf:
-          - type: number
-          - type: string
-            pattern: ^\d+$
-        browserTimezone:
-          anyOf:
-          - type: integer
-            minimum: -9999
-            maximum: 9999
-          - type: string
-            pattern: ^[\-]?\d+$
-        browserUserAgent:
-          type: string
-          maxLength: 2048
-        browserPlatform:
-          type: string
-          maxLength: 2048
-        sdkInterface:
-          type: string
-          enum:
-          - '01'
-          - '02'
-          - '03'
-        sdkUiType:
-          type: string
-          pattern: ^(0[1-5]( *, *0[0-5])*)?$
-        sdkAppID:
-          type: string
-        sdkEncData:
-          type: string
-        sdkEphemPubKey:
-          type: string
-        sdkMaxTimeout:
-          type: number
-          minimum: 5
-        sdkReferenceNumber:
-          type: string
-        sdkTransID:
-          type: string
-      additionalProperties: false
-    Payout_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        referenceSchemeLifecycleIdentifier:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits_2'
-        customer:
-          $ref: '#/components/schemas/Customer'
-        payByLink:
-          $ref: '#/components/schemas/PayByLink'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        includeTracing:
-          type: boolean
-        allowUnlinkedRefund:
-          type: boolean
-          description: 'When true, the payout is treated as an unlinked refund (a credit not tied to a prior debit transaction). Supported by select connectors only. Available on: Axepta, CheckoutCom, StripeExtended, WorldLine.
-
-            '
-      additionalProperties: false
-    Register_2:
-      type: object
-      required:
-      - merchantTransactionId
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData_2'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData_2'
-        payByLink:
-          $ref: '#/components/schemas/PayByLink'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-          description: UUID of a previous register transaction on the same merchant. Used by the register-with-expiry-update flow to point at the existing token whose expiry date should be patched. When set together with extraData.expiryMonthUpdate / expiryYearUpdate, the request becomes a card-data-less expiry refresh — no PAN/CVV is required.
-      additionalProperties: false
-    PayByLink:
-      type: object
-      properties:
-        sendByEmail:
-          type: boolean
-        expirationInMinute:
-          type: integer
-          format: int32
-          minimum: 1
-      additionalProperties: false
-    Deregister_2:
-      type: object
-      required:
-      - merchantTransactionId
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        transactionToken:
-          type: string
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        tokenType:
-          type: string
-          enum:
-          - ALL
-          - PAN
-          - NT
-      additionalProperties: false
-    Splits_2:
-      type: array
-      items:
-        type: object
-        properties:
-          identification:
-            type: string
-          amount:
-            $ref: '#/components/schemas/Amount'
-          currency:
-            $ref: '#/components/schemas/Currency'
-          sellerMerchantGuid:
-            type: string
-          sellerMerchantExternalId:
-            type: string
-          commissionFee:
-            type: object
-            properties:
-              amount:
-                $ref: '#/components/schemas/Amount'
-              currency:
-                $ref: '#/components/schemas/Currency'
-        additionalProperties: false
-    Preauthorize_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        captureInMinutes:
-          type: integer
-          minimum: 1
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        surchargeAmount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits_2'
-        withRegister:
-          type: boolean
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData_2'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData_2'
-        payByLink:
-          $ref: '#/components/schemas/PayByLink'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        requestDcc:
-          type: boolean
-        dccData:
-          $ref: '#/components/schemas/DccData'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        referenceSchemeTransactionIdentifier:
-          type: string
-          maxLength: 50
-        includeTracing:
-          type: boolean
-        requestPartialAuthorization:
-          type: boolean
-          description: 'Request a partial authorization when the full amount cannot be authorized. The actual authorized amount may be less than the requested amount. Available on: CheckoutCom, StripeExtended, WorldLine
-
-            '
-      additionalProperties: false
-    Refund_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      - referenceUuid
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        referenceSchemeLifecycleIdentifier:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        callbackUrl:
-          type: string
-          maxLength: 4096
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits_2'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-      additionalProperties: false
-    CustomerProfileData_2:
-      type: object
-      properties:
-        profileGuid:
-          type: string
-        customerIdentification:
-          type: string
-          maxLength: 36
-        paymentToken:
-          type: string
-        markAsPreferred:
-          type: boolean
-      additionalProperties: false
-    IncrementalAuthorization_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - referenceUuid
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        referenceSchemeLifecycleIdentifier:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-      additionalProperties: false
-    Debit_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        surchargeAmount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        successUrl:
-          type: string
-          maxLength: 65535
-        cancelUrl:
-          type: string
-          maxLength: 65535
-        errorUrl:
-          type: string
-          maxLength: 65535
-        callbackUrl:
-          type: string
-          maxLength: 65535
-        transactionToken:
-          type: string
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits_2'
-        withRegister:
-          type: boolean
-        transactionIndicator:
-          type: string
-          enum:
-          - SINGLE
-          - INITIAL
-          - RECURRING
-          - FIRST-CARDONFILE
-          - CARDONFILE
-          - CARDONFILE-MERCHANT-INITIATED
-          - MOTO
-        customer:
-          $ref: '#/components/schemas/Customer'
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        customerProfileData:
-          $ref: '#/components/schemas/CustomerProfileData_2'
-        threeDSecureData:
-          $ref: '#/components/schemas/ThreeDSecureData_2'
-        payByLink:
-          $ref: '#/components/schemas/PayByLink'
-        language:
-          type: string
-          minLength: 2
-          maxLength: 2
-        requestDcc:
-          type: boolean
-        dccData:
-          $ref: '#/components/schemas/DccData'
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-        referenceSchemeTransactionIdentifier:
-          type: string
-          maxLength: 50
-        includeTracing:
-          type: boolean
-        requestPartialAuthorization:
-          type: boolean
-          description: 'Request a partial authorization when the full amount cannot be authorized. The actual authorized amount may be less than the requested amount. Available on: CheckoutCom, StripeExtended, WorldLine
-
-            '
-      additionalProperties: false
-    ReturnCardData_2:
-      type: object
-      properties:
-        _TYPE:
-          type: string
-          enum:
-          - cardData
-        type:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        country:
-          $ref: '#/components/schemas/Country'
-        cardHolder:
-          type: string
-        expiryMonth:
-          type: string
-          pattern: ^((0[1-9])|(1[0-2]))$
-        expiryYear:
-          type: string
-          pattern: ^[0-9]{4}$
-        binDigits:
-          type: string
-          pattern: ^[0-9]{6-8}$
-        firstSixDigits:
-          type: string
-          pattern: ^[0-9]{6}$
-        lastFourDigits:
-          type: string
-          pattern: ^[0-9]{4}$
-        fingerprint:
-          type: string
-        binBrand:
-          type: string
-        binBank:
-          type: string
-        binType:
-          type: string
-        binLevel:
-          type: string
-        binCountry:
-          type: string
-        binSegment:
-          type: string
-          enum:
-          - Consumer
-          - Business
-          - Commercial
-          - Government
-          - Unknown
-        binRawData:
-          type: object
-          properties:
-            type:
-              type: string
-            data:
-              type: object
-              additionalProperties: true
-        threeDSecure:
-          type: string
-        eci:
-          type: string
-        merchantAdviceCode:
-          type: string
-        parsedMerchantAdviceCode:
-          type: string
-        schemeTransactionIdentifier:
-          type: string
-        schemeLifecycleIdentifier:
-          type: string
-        referenceSchemeLifecycleIdentifier:
-          type: string
-        cardUpdateStatus:
-          type: string
-          enum:
-          - updated
-          - contact
-          - new-expiry
-          - closed
-          description: Account updater transaction status
-        cardUpdatedAt:
-          type: string
-          description: Last run of the batch
-          format: date
-          example: '2024-05-07 00:00:00'
-        cardUpdatePausedUntil:
-          type: string
-          description: Updates paused until this date
-          format: date
-          example: '2024-05-07'
-    Capture_2:
-      type: object
-      required:
-      - merchantTransactionId
-      - amount
-      - currency
-      - referenceUuid
-      properties:
-        merchantTransactionId:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId1:
-          type: string
-          minLength: 1
-          maxLength: 50
-        additionalId2:
-          type: string
-          minLength: 1
-          maxLength: 50
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-        pspPassthroughData:
-          $ref: '#/components/schemas/PspPassthroughData'
-        merchantMetaData:
-          type: string
-          maxLength: 255
-        referenceUuid:
-          type: string
-          minLength: 1
-          maxLength: 50
-        amount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        description:
-          type: string
-          maxLength: 255
-        items:
-          $ref: '#/components/schemas/Items'
-        splits:
-          $ref: '#/components/schemas/Splits_2'
-        isFinalCapture:
-          type: boolean
-        l2l3Data:
-          $ref: '#/components/schemas/L2L3Data'
-      additionalProperties: false
-    ThreeDSecureData_2:
       type: object
       properties:
         3dsecure:
@@ -3386,10 +1022,1230 @@ components:
         sdkTransID:
           type: string
       additionalProperties: false
+    DateTimeZone:
+      type: string
+      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))T(([0-1][0-9])|([2][0-3])):([0-5][0-9]):([0-5][0-9])\+[0-9]{2}\:[0-9]{2}$
+    Register:
+      type: object
+      required:
+      - merchantTransactionId
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        payByLink:
+          $ref: '#/components/schemas/PayByLink'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: UUID of a previous register transaction on the same merchant. Used by the register-with-expiry-update flow to point at the existing token whose expiry date should be patched. When set together with extraData.expiryMonthUpdate / expiryYearUpdate, the request becomes a card-data-less expiry refresh — no PAN/CVV is required.
+      additionalProperties: false
+    DccData:
+      type: object
+      properties:
+        remoteIdentifier:
+          type: string
+        originalAmount:
+          $ref: '#/components/schemas/Amount'
+        originalCurrency:
+          $ref: '#/components/schemas/Currency'
+        convertedAmount:
+          $ref: '#/components/schemas/Amount'
+        convertedCurrency:
+          $ref: '#/components/schemas/Currency'
+        conversionRate:
+          type: number
+        selectedCurrency:
+          type: string
+        markUp:
+          type: number
+    Refund:
+      type: object
+      required:
+      - merchantTransactionId
+      - amount
+      - currency
+      - referenceUuid
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        referenceSchemeLifecycleIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        callbackUrl:
+          type: string
+          maxLength: 4096
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        splits:
+          $ref: '#/components/schemas/Splits'
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+      additionalProperties: false
+    ReturnIbanData:
+      type: object
+      properties:
+        _TYPE:
+          type: string
+          enum:
+          - ibanData
+        accountOwner:
+          type: string
+        iban:
+          type: string
+        bic:
+          type: string
+        mandateId:
+          type: string
+        mandateDate:
+          $ref: '#/components/schemas/Date'
+        bankName:
+          type: string
+        bankBranchName:
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    PspPassthroughData:
+      type: object
+      additionalProperties:
+        type: string
+    Void:
+      type: object
+      required:
+      - merchantTransactionId
+      - referenceUuid
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 255
+      additionalProperties: false
+    PayByLink:
+      type: object
+      properties:
+        sendByEmail:
+          type: boolean
+        expirationInMinute:
+          type: integer
+          format: int32
+          minimum: 1
+      additionalProperties: false
+    Splits:
+      type: array
+      items:
+        type: object
+        properties:
+          identification:
+            type: string
+          amount:
+            $ref: '#/components/schemas/Amount'
+          currency:
+            $ref: '#/components/schemas/Currency'
+          sellerMerchantGuid:
+            type: string
+          sellerMerchantExternalId:
+            type: string
+          commissionFee:
+            type: object
+            properties:
+              amount:
+                $ref: '#/components/schemas/Amount'
+              currency:
+                $ref: '#/components/schemas/Currency'
+        additionalProperties: false
+    Items:
+      type: array
+      items:
+        type: object
+        properties:
+          identification:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+          quantity:
+            anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^\d+$
+          price:
+            anyOf:
+            - type: number
+            - type: string
+              pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
+          currency:
+            $ref: '#/components/schemas/Currency'
+          l2l3Data:
+            type: object
+            properties:
+              type:
+                type: string
+              unit:
+                type: string
+              unitPrice:
+                $ref: '#/components/schemas/Amount'
+              discount:
+                $ref: '#/components/schemas/Amount'
+              discountRate:
+                $ref: '#/components/schemas/Amount'
+              shippingAmount:
+                $ref: '#/components/schemas/Amount'
+              taxAmount:
+                $ref: '#/components/schemas/Amount'
+              taxRate:
+                $ref: '#/components/schemas/Amount'
+              commodityCode:
+                type: string
+              taxDetails:
+                $ref: '#/components/schemas/TaxDetails'
+            additionalProperties: false
+          extraData:
+            $ref: '#/components/schemas/ExtraData'
+        additionalProperties: false
+    Country:
+      type: string
+      pattern: ^[A-Z]{2}$
+    Preauthorize:
+      type: object
+      required:
+      - merchantTransactionId
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        captureInMinutes:
+          type: integer
+          minimum: 1
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        surchargeAmount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        splits:
+          $ref: '#/components/schemas/Splits'
+        withRegister:
+          type: boolean
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        payByLink:
+          $ref: '#/components/schemas/PayByLink'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        requestDcc:
+          type: boolean
+        dccData:
+          $ref: '#/components/schemas/DccData'
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+        referenceSchemeTransactionIdentifier:
+          type: string
+          maxLength: 50
+        includeTracing:
+          type: boolean
+        requestPartialAuthorization:
+          type: boolean
+          description: 'Request a partial authorization when the full amount cannot be authorized. The actual authorized amount may be less than the requested amount. Available on: CheckoutCom, StripeExtended, WorldLine
+
+            '
+      additionalProperties: false
+    IbanData:
+      type: object
+      properties:
+        ibanData:
+          type: object
+          properties:
+            iban:
+              type: string
+              maxLength: 34
+            bic:
+              type: string
+              maxLength: 11
+            mandateId:
+              type: string
+              maxLength: 50
+            mandateDate:
+              $ref: '#/components/schemas/Date'
+          additionalProperties: false
+      additionalProperties: false
+    Date:
+      type: string
+      pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$
+    TaxDetails:
+      type: array
+      items:
+        type: object
+        properties:
+          type:
+            type: string
+            maxLength: 255
+          amount:
+            $ref: '#/components/schemas/Amount'
+          rate:
+            $ref: '#/components/schemas/Amount'
+          code:
+            type: string
+            maxLength: 255
+          taxId:
+            type: string
+            maxLength: 255
+          applied:
+            type: string
+            maxLength: 255
+          exemptionCode:
+            type: string
+            maxLength: 255
+        additionalProperties: false
+    L2L3Data:
+      type: object
+      properties:
+        taxAmount:
+          $ref: '#/components/schemas/Amount'
+        vatRegistrationNumber:
+          type: string
+          maxLength: 255
+        nationalTaxIncluded:
+          type: string
+        discountAmount:
+          $ref: '#/components/schemas/Amount'
+        commodityCode:
+          type: string
+          maxLength: 255
+        freightAmount:
+          $ref: '#/components/schemas/Amount'
+        freightTaxAmount:
+          $ref: '#/components/schemas/Amount'
+        dutyAmount:
+          $ref: '#/components/schemas/Amount'
+        taxDetails:
+          $ref: '#/components/schemas/TaxDetails'
+      additionalProperties: false
+    ReturnData:
+      oneOf:
+      - $ref: '#/components/schemas/ReturnCardData'
+      - $ref: '#/components/schemas/ReturnPhoneData'
+      - $ref: '#/components/schemas/ReturnIbanData'
+      - $ref: '#/components/schemas/ReturnWalletData'
+      discriminator:
+        propertyName: _TYPE
+        mapping:
+          cardData: '#/components/schemas/ReturnCardData'
+          phoneData: '#/components/schemas/ReturnPhoneData'
+          ibanData: '#/components/schemas/ReturnIbanData'
+          walletData: '#/components/schemas/ReturnWalletData'
+    CustomerProfileData:
+      type: object
+      properties:
+        profileGuid:
+          type: string
+        customerIdentification:
+          type: string
+          maxLength: 36
+        paymentToken:
+          type: string
+        markAsPreferred:
+          type: boolean
+      additionalProperties: false
+    Capture:
+      type: object
+      required:
+      - merchantTransactionId
+      - amount
+      - currency
+      - referenceUuid
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        splits:
+          $ref: '#/components/schemas/Splits'
+        isFinalCapture:
+          type: boolean
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+      additionalProperties: false
+    Amount:
+      type: string
+      pattern: ^(([0-9]{1,10})|([0-9]{1,10}\.[0-9]{1,3}))$
+    Customer:
+      type: object
+      properties:
+        identification:
+          type: string
+          maxLength: 36
+        firstName:
+          type: string
+          maxLength: 50
+        lastName:
+          type: string
+          maxLength: 50
+        birthDate:
+          $ref: '#/components/schemas/Date'
+        gender:
+          type: string
+          enum:
+          - M
+          - F
+        billingAddress1:
+          type: string
+          maxLength: 50
+        billingAddress2:
+          type: string
+          maxLength: 50
+        billingCity:
+          type: string
+          maxLength: 50
+        billingPostcode:
+          type: string
+          maxLength: 16
+        billingState:
+          type: string
+          maxLength: 30
+        billingCountry:
+          $ref: '#/components/schemas/Country'
+        billingPhone:
+          type: string
+          maxLength: 20
+        shippingFirstName:
+          type: string
+          maxLength: 50
+        shippingLastName:
+          type: string
+          maxLength: 50
+        shippingCompany:
+          type: string
+          maxLength: 50
+        shippingAddress1:
+          type: string
+          maxLength: 50
+        shippingAddress2:
+          type: string
+          maxLength: 50
+        shippingCity:
+          type: string
+          maxLength: 50
+        shippingPostcode:
+          type: string
+          maxLength: 16
+        shippingState:
+          type: string
+          maxLength: 30
+        shippingCountry:
+          $ref: '#/components/schemas/Country'
+        shippingPhone:
+          type: string
+          maxLength: 20
+        company:
+          type: string
+          maxLength: 50
+        email:
+          type: string
+          maxLength: 255
+        emailVerified:
+          type: boolean
+        ipAddress:
+          type: string
+          maxLength: 50
+        nationalId:
+          type: string
+          maxLength: 20
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        paymentData:
+          $ref: '#/components/schemas/PaymentData'
+      additionalProperties: false
+    Currency:
+      type: string
+      pattern: ^[A-Z]{3}$
+    ReturnPhoneData:
+      type: object
+      properties:
+        _TYPE:
+          type: string
+          enum:
+          - phoneData
+        phoneNumber:
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        operator:
+          type: string
+      additionalProperties: false
+    ScheduleData:
+      type: object
+      properties:
+        scheduleId:
+          type: string
+        scheduleStatus:
+          $ref: '#/components/schemas/ScheduleStatus'
+        scheduledAt:
+          $ref: '#/components/schemas/DateTimeZone'
+        merchantMetaData:
+          type: string
+      additionalProperties: false
+    Debit:
+      type: object
+      required:
+      - merchantTransactionId
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        surchargeAmount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        splits:
+          $ref: '#/components/schemas/Splits'
+        withRegister:
+          type: boolean
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        customer:
+          $ref: '#/components/schemas/Customer'
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        threeDSecureData:
+          $ref: '#/components/schemas/ThreeDSecureData'
+        payByLink:
+          $ref: '#/components/schemas/PayByLink'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        requestDcc:
+          type: boolean
+        dccData:
+          $ref: '#/components/schemas/DccData'
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+        referenceSchemeTransactionIdentifier:
+          type: string
+          maxLength: 50
+        includeTracing:
+          type: boolean
+        requestPartialAuthorization:
+          type: boolean
+          description: 'Request a partial authorization when the full amount cannot be authorized. The actual authorized amount may be less than the requested amount. Available on: CheckoutCom, StripeExtended, WorldLine
+
+            '
+      additionalProperties: false
+    Payout:
+      type: object
+      required:
+      - merchantTransactionId
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        referenceSchemeLifecycleIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        transactionToken:
+          type: string
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        splits:
+          $ref: '#/components/schemas/Splits'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        payByLink:
+          $ref: '#/components/schemas/PayByLink'
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+        includeTracing:
+          type: boolean
+        allowUnlinkedRefund:
+          type: boolean
+          description: 'When true, the payout is treated as an unlinked refund (a credit not tied to a prior debit transaction). Supported by select connectors only. Available on: Axepta, CheckoutCom, StripeExtended, WorldLine.
+
+            '
+      additionalProperties: false
+    ExtraData:
+      type: object
+      additionalProperties:
+        type: string
+    ReturnWalletData:
+      type: object
+      properties:
+        _TYPE:
+          type: string
+          enum:
+          - walletData
+        walletReferenceId:
+          type: string
+        walletOwner:
+          type: string
+        walletType:
+          type: string
+      additionalProperties: false
+    Schedule:
+      type: object
+      required:
+      - amount
+      - currency
+      - periodLength
+      - periodUnit
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        periodLength:
+          type: integer
+          minimum: 0
+        periodUnit:
+          type: string
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+        startDateTime:
+          $ref: '#/components/schemas/DateTimeZone'
+        merchantMetaData:
+          type: string
+        callbackUrl:
+          type: string
+      additionalProperties: false
+    IncrementalAuthorization:
+      type: object
+      required:
+      - merchantTransactionId
+      - referenceUuid
+      - amount
+      - currency
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        referenceSchemeLifecycleIdentifier:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        amount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        successUrl:
+          type: string
+          maxLength: 65535
+        cancelUrl:
+          type: string
+          maxLength: 65535
+        errorUrl:
+          type: string
+          maxLength: 65535
+        callbackUrl:
+          type: string
+          maxLength: 65535
+        description:
+          type: string
+          maxLength: 255
+        items:
+          $ref: '#/components/schemas/Items'
+        transactionIndicator:
+          type: string
+          enum:
+          - SINGLE
+          - INITIAL
+          - RECURRING
+          - FIRST-CARDONFILE
+          - CARDONFILE
+          - CARDONFILE-MERCHANT-INITIATED
+          - MOTO
+        language:
+          type: string
+          minLength: 2
+          maxLength: 2
+        l2l3Data:
+          $ref: '#/components/schemas/L2L3Data'
+      additionalProperties: false
+    ScheduleStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - PAUSED
+      - CANCELLED
+      - ERROR
+      - CREATE-PENDING
+    ReturnCardData:
+      type: object
+      properties:
+        _TYPE:
+          type: string
+          enum:
+          - cardData
+        type:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        cardHolder:
+          type: string
+        expiryMonth:
+          type: string
+          pattern: ^((0[1-9])|(1[0-2]))$
+        expiryYear:
+          type: string
+          pattern: ^[0-9]{4}$
+        binDigits:
+          type: string
+          pattern: ^[0-9]{6-8}$
+        firstSixDigits:
+          type: string
+          pattern: ^[0-9]{6}$
+        lastFourDigits:
+          type: string
+          pattern: ^[0-9]{4}$
+        fingerprint:
+          type: string
+        binBrand:
+          type: string
+        binBank:
+          type: string
+        binType:
+          type: string
+        binLevel:
+          type: string
+        binCountry:
+          type: string
+        binSegment:
+          type: string
+          enum:
+          - Consumer
+          - Business
+          - Commercial
+          - Government
+          - Unknown
+        binRawData:
+          type: object
+          properties:
+            type:
+              type: string
+            data:
+              type: object
+              additionalProperties: true
+        threeDSecure:
+          type: string
+        eci:
+          type: string
+        merchantAdviceCode:
+          type: string
+        parsedMerchantAdviceCode:
+          type: string
+        schemeTransactionIdentifier:
+          type: string
+        schemeLifecycleIdentifier:
+          type: string
+        referenceSchemeLifecycleIdentifier:
+          type: string
+        cardUpdateStatus:
+          type: string
+          enum:
+          - updated
+          - contact
+          - new-expiry
+          - closed
+          description: Account updater transaction status
+        cardUpdatedAt:
+          type: string
+          description: Last run of the batch
+          format: date
+          example: '2024-05-07 00:00:00'
+        cardUpdatePausedUntil:
+          type: string
+          description: Updates paused until this date
+          format: date
+          example: '2024-05-07'
+    TransactionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        uuid:
+          type: string
+        purchaseId:
+          type: string
+        returnType:
+          type: string
+          enum:
+          - FINISHED
+          - REDIRECT
+          - HTML
+          - PENDING
+          - ERROR
+          - PENDING_DCC
+        redirectType:
+          type: string
+          enum:
+          - iframe
+          - fullpage
+          - 3ds
+        redirectUrl:
+          type: string
+          maxLength: 255
+        redirectQRCode:
+          type: string
+          description: DataUrl
+        htmlContent:
+          type: string
+        paymentDescriptor:
+          type: string
+        paymentMethod:
+          type: string
+        returnData:
+          $ref: '#/components/schemas/ReturnData'
+        scheduleData:
+          $ref: '#/components/schemas/ScheduleData'
+        customerProfileData:
+          $ref: '#/components/schemas/CustomerProfileData'
+        riskCheckData:
+          type: object
+          properties:
+            riskCheckResult:
+              type: string
+              enum:
+              - APPROVED
+              - DECLINED
+              - REVIEW
+            riskScore:
+              type: number
+            threeDSecureRequired:
+              type: boolean
+          additionalProperties: false
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              errorMessage:
+                type: string
+              errorCode:
+                type: integer
+                format: int32
+              adapterMessage:
+                type: string
+              adapterCode:
+                type: string
+            additionalProperties: false
+        adapterMessage:
+          type: string
+        adapterCode:
+          type: string
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        dccData:
+          type: object
+          properties:
+            uuid:
+              type: string
+            originalAmount:
+              $ref: '#/components/schemas/Amount'
+            originalCurrency:
+              $ref: '#/components/schemas/Currency'
+            convertedAmount:
+              $ref: '#/components/schemas/Amount'
+            convertedCurrency:
+              $ref: '#/components/schemas/Currency'
+            conversionRate:
+              type: number
+            disclaimer:
+              type: string
+      additionalProperties: false
+    WalletData:
+      type: object
+      properties:
+        walletData:
+          type: object
+          properties:
+            walletReferenceId:
+              type: string
+              maxLength: 255
+            walletOwner:
+              type: string
+              maxLength: 255
+            walletType:
+              type: string
+              maxLength: 255
+          additionalProperties: false
+      additionalProperties: false
+    Deregister:
+      type: object
+      required:
+      - merchantTransactionId
+      properties:
+        merchantTransactionId:
+          type: string
+          minLength: 1
+          maxLength: 50
+        transactionToken:
+          type: string
+        additionalId1:
+          type: string
+          minLength: 1
+          maxLength: 50
+        additionalId2:
+          type: string
+          minLength: 1
+          maxLength: 50
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
+        pspPassthroughData:
+          $ref: '#/components/schemas/PspPassthroughData'
+        merchantMetaData:
+          type: string
+          maxLength: 255
+        referenceUuid:
+          type: string
+          minLength: 1
+          maxLength: 50
+        tokenType:
+          type: string
+          enum:
+          - ALL
+          - PAN
+          - NT
+      additionalProperties: false
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
-x-refined-from:
-- till-payments-direct-pci.yml
-- till-payments-gateway.yml
+externalDocs:
+  description: Till Payments Gateway Documentation
+  url: https://gateway.tillpayments.com/documentation/gateway
