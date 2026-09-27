@@ -258,6 +258,41 @@ paths:
                       errorCode: 1002
 components:
   schemas:
+    DisputeResponseExtraData:
+      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        someKey: someValue
+        otherKey:
+        - otherKey1: otherValue1
+          otherKey2: otherValue2
+    TransactionError:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+          format: int32
+        adapterMessage:
+          type: string
+        adapterCode:
+          type: string
+      additionalProperties: false
+    DisputeMetadataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        extraData:
+          $ref: '#/components/schemas/DisputeResponseExtraData'
+        metaData:
+          $ref: '#/components/schemas/DisputeResponseMetadata'
+        errors:
+          $ref: '#/components/schemas/TransactionErrors'
+      additionalProperties: false
     DisputeMetadataRequest:
       type: object
       properties:
@@ -273,49 +308,14 @@ components:
         otherKey:
         - otherKey1: otherValue1
           otherKey2: otherValue2
-    DisputeMetadataResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        extraData:
-          $ref: '#/components/schemas/DisputeResponseExtraData'
-        metaData:
-          $ref: '#/components/schemas/DisputeResponseMetadata'
-        errors:
-          $ref: '#/components/schemas/TransactionErrors'
-      additionalProperties: false
-    TransactionError:
-      type: object
-      properties:
-        message:
-          type: string
-        code:
-          type: integer
-          format: int32
-        adapterMessage:
-          type: string
-        adapterCode:
-          type: string
-      additionalProperties: false
-    TransactionErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionError'
     ExtraData:
       type: object
       additionalProperties:
         type: string
-    DisputeResponseExtraData:
-      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
-      type: object
-      additionalProperties:
-        type: string
-      example:
-        someKey: someValue
-        otherKey:
-        - otherKey1: otherValue1
-          otherKey2: otherValue2
+    TransactionErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionError'
     DisputeSubmitEvidenceRequest:
       type: object
       properties:
@@ -326,16 +326,6 @@ components:
       properties:
         extraData:
           $ref: '#/components/schemas/ExtraData'
-    DisputeResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        extraData:
-          $ref: '#/components/schemas/DisputeResponseExtraData'
-        errors:
-          $ref: '#/components/schemas/TransactionErrors'
-      additionalProperties: false
     DisputeUploadEvidenceRequest:
       type: object
       required:
@@ -348,6 +338,16 @@ components:
           type: string
           additionalProperties:
             type: string
+    DisputeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        extraData:
+          $ref: '#/components/schemas/DisputeResponseExtraData'
+        errors:
+          $ref: '#/components/schemas/TransactionErrors'
+      additionalProperties: false
   parameters:
     Uuid:
       name: uuid
