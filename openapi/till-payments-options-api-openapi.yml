@@ -72,6 +72,12 @@ paths:
                     errorMessage: Given identifier 'someIdentifier' is invalid.
 components:
   schemas:
+    OptionsRequest:
+      type: object
+      properties:
+        parameters:
+          type: object
+      additionalProperties: false
     OptionsResponse:
       type: object
       properties:
@@ -89,12 +95,6 @@ components:
             additionalProperties: false
         error:
           type: string
-      additionalProperties: false
-    OptionsRequest:
-      type: object
-      properties:
-        parameters:
-          type: object
       additionalProperties: false
   securitySchemes:
     basicAuth:

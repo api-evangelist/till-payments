@@ -257,17 +257,23 @@ paths:
                     - errorMessage: Referenced Transaction is not of Type 'Chargeback'
                       errorCode: 1002
 components:
-  schemas:
-    DisputeResponseExtraData:
-      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
-      type: object
-      additionalProperties:
+  parameters:
+    Uuid:
+      name: uuid
+      in: path
+      description: Uuid of Dispute
+      required: true
+      schema:
         type: string
-      example:
-        someKey: someValue
-        otherKey:
-        - otherKey1: otherValue1
-          otherKey2: otherValue2
+    ApiKey:
+      name: apiKey
+      in: path
+      description: API key of connector.
+      required: true
+      schema:
+        type: string
+        maxLength: 50
+  schemas:
     TransactionError:
       type: object
       properties:
@@ -281,6 +287,39 @@ components:
         adapterCode:
           type: string
       additionalProperties: false
+    ExtraData:
+      type: object
+      additionalProperties:
+        type: string
+    DisputeResponseMetadata:
+      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        someKey: someValue
+        otherKey:
+        - otherKey1: otherValue1
+          otherKey2: otherValue2
+    TransactionErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionError'
+    DisputeResponseExtraData:
+      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        someKey: someValue
+        otherKey:
+        - otherKey1: otherValue1
+          otherKey2: otherValue2
+    DisputeMetadataRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
     DisputeMetadataResponse:
       type: object
       properties:
@@ -293,35 +332,7 @@ components:
         errors:
           $ref: '#/components/schemas/TransactionErrors'
       additionalProperties: false
-    DisputeMetadataRequest:
-      type: object
-      properties:
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-    DisputeResponseMetadata:
-      description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
-      type: object
-      additionalProperties:
-        type: string
-      example:
-        someKey: someValue
-        otherKey:
-        - otherKey1: otherValue1
-          otherKey2: otherValue2
-    ExtraData:
-      type: object
-      additionalProperties:
-        type: string
-    TransactionErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionError'
     DisputeSubmitEvidenceRequest:
-      type: object
-      properties:
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-    DisputeAcceptRequest:
       type: object
       properties:
         extraData:
@@ -348,22 +359,11 @@ components:
         errors:
           $ref: '#/components/schemas/TransactionErrors'
       additionalProperties: false
-  parameters:
-    Uuid:
-      name: uuid
-      in: path
-      description: Uuid of Dispute
-      required: true
-      schema:
-        type: string
-    ApiKey:
-      name: apiKey
-      in: path
-      description: API key of connector.
-      required: true
-      schema:
-        type: string
-        maxLength: 50
+    DisputeAcceptRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
   securitySchemes:
     basicAuth:
       type: http
