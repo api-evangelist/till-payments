@@ -1,0 +1,12 @@
+{
+ "url": "https://gateway.tillpayments.com/Schema/V3/OpenApiSpecification.yml",
+ "requested_url": "https://gateway.tillpayments.com/Schema/V3/OpenApiSpecification.yml",
+ "status": 200,
+ "content_type": "application/yaml; charset=UTF-8",
+ "bytes": 157875,
+ "sha256": "2adcba7f519ee44e06d627bcdf061d7d577ceea784b82da455e89fbc109b2442",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
