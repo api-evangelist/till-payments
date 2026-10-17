@@ -258,18 +258,6 @@ paths:
                       errorCode: 1002
 components:
   schemas:
-    DisputeMetadataResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        extraData:
-          $ref: '#/components/schemas/DisputeResponseExtraData'
-        metaData:
-          $ref: '#/components/schemas/DisputeResponseMetadata'
-        errors:
-          $ref: '#/components/schemas/TransactionErrors'
-      additionalProperties: false
     DisputeResponseExtraData:
       description: Object containing key-value pairs (string-to-string) or nested objects, returned by the Provider.
       type: object
@@ -280,19 +268,6 @@ components:
         otherKey:
         - otherKey1: otherValue1
           otherKey2: otherValue2
-    ExtraData:
-      type: object
-      additionalProperties:
-        type: string
-    DisputeMetadataRequest:
-      type: object
-      properties:
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
-    TransactionErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionError'
     TransactionError:
       type: object
       properties:
@@ -316,6 +291,31 @@ components:
         otherKey:
         - otherKey1: otherValue1
           otherKey2: otherValue2
+    ExtraData:
+      type: object
+      additionalProperties:
+        type: string
+    TransactionErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionError'
+    DisputeMetadataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        extraData:
+          $ref: '#/components/schemas/DisputeResponseExtraData'
+        metaData:
+          $ref: '#/components/schemas/DisputeResponseMetadata'
+        errors:
+          $ref: '#/components/schemas/TransactionErrors'
+      additionalProperties: false
+    DisputeMetadataRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
     DisputeUploadEvidenceRequest:
       type: object
       required:
@@ -328,11 +328,6 @@ components:
           type: string
           additionalProperties:
             type: string
-    DisputeSubmitEvidenceRequest:
-      type: object
-      properties:
-        extraData:
-          $ref: '#/components/schemas/ExtraData'
     DisputeAcceptRequest:
       type: object
       properties:
@@ -348,14 +343,12 @@ components:
         errors:
           $ref: '#/components/schemas/TransactionErrors'
       additionalProperties: false
+    DisputeSubmitEvidenceRequest:
+      type: object
+      properties:
+        extraData:
+          $ref: '#/components/schemas/ExtraData'
   parameters:
-    Uuid:
-      name: uuid
-      in: path
-      description: Uuid of Dispute
-      required: true
-      schema:
-        type: string
     ApiKey:
       name: apiKey
       in: path
@@ -364,6 +357,13 @@ components:
       schema:
         type: string
         maxLength: 50
+    Uuid:
+      name: uuid
+      in: path
+      description: Uuid of Dispute
+      required: true
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
