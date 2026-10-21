@@ -1,0 +1,24 @@
+generated: '2026-10-20'
+method: searched
+checked:
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+source:
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+edges:
+- partner_name: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=d925a5cb-6f80-4276-968e-60059030ae0c
+  mirror_of: salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+  apps:
+  - Till Payments Cartridge for B2C Commerce
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: sales, paymentsProcessing, integration
