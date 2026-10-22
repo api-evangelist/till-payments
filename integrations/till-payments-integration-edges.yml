@@ -2,6 +2,11 @@ generated: '2026-10-20'
 method: searched
 checked:
 - salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+- https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+- https://www.bankofcanada.ca/rps-api/cif2/accounts/list
+- https://www.payments.ca/payment-resources/directories?field_directory_type=10
+- https://www.payments.ca/payment-resources/directories?field_directory_type=13
+- https://www.payments.ca/payment-resources/directories?field_directory_type=14
 source:
 - salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
 edges:
@@ -22,3 +27,39 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: sales, paymentsProcessing, integration
+- partner_name: Bank of Canada RPAA registry of payment service providers
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+  category: Canadian retail payment activities (RPAA) PSP registration
+  contract_reference:
+    register: Bank of Canada RPAA registry of payment service providers
+    spec_file: null
+    standard: null
+    role: registered-psp
+    registrations:
+    - registered_name: Till Payments Canada Corp.
+      register_status: registered
+      register_country: CA
+      register_id: b91cc8c7-ce18-f111-8342-7ced8da586db
+      matched_domain: tillpayments.com
+      matched_by: domain
+      evidence_url: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/psp-registry-details/?account_id=b91cc8c7-ce18-f111-8342-7ced8da586db
+      licences:
+      - RPAA registered PSP
+      brand: Till
+      registration_date: '2026-09-21'
+      head_office_country: Canada
+      trade_names:
+      - Till Payments
+      has_violations: false
+    signal_note: 'participation only: a regulator registration / payment-system membership; no API conformance is
+      published by this register'
+    detected_by: sweep-canada-rpaa-psp-registry.py
+    detected: '2026-10-22'
+  detected_by: sweep-canada-rpaa-psp-registry.py
+  first_seen: '2026-10-22'

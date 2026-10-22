@@ -16,3 +16,39 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: till-payments-bank-of-canada-rpaa-registry-of-payment-service-providers
+  label: Bank of Canada RPAA registry of payment service providers
+  partner_name: Bank of Canada RPAA registry of payment service providers
+  category: Canadian retail payment activities (RPAA) PSP registration
+  type: register
+  channel: regulator-register
+  evidence: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Bank of Canada RPAA registry of payment service providers
+    spec_file: null
+    standard: null
+    role: registered-psp
+    registrations:
+    - registered_name: Till Payments Canada Corp.
+      register_status: registered
+      register_country: CA
+      register_id: b91cc8c7-ce18-f111-8342-7ced8da586db
+      matched_domain: tillpayments.com
+      matched_by: domain
+      evidence_url: https://www.bankofcanada.ca/core-functions/retail-payments-supervision/psp-registry/psp-registry-details/?account_id=b91cc8c7-ce18-f111-8342-7ced8da586db
+      licences:
+      - RPAA registered PSP
+      brand: Till
+      registration_date: '2026-09-21'
+      head_office_country: Canada
+      trade_names:
+      - Till Payments
+      has_violations: false
+    signal_note: 'participation only: a regulator registration / payment-system membership; no API conformance is
+      published by this register'
+    detected_by: sweep-canada-rpaa-psp-registry.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
