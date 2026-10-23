@@ -362,3 +362,9 @@ components:
 externalDocs:
   description: Till Payments Gateway Documentation
   url: https://gateway.tillpayments.com/documentation/gateway
+x-provenance:
+  method: harvested
+  publisher: Till Payments
+  source: https://gateway.tillpayments.com/Schema/V3/OpenApiSpecification.yml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
